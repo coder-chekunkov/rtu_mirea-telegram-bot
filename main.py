@@ -32,6 +32,8 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, "Вопросы: в разработке!")
     elif message.text == "/develop":
         bot.send_message(message.from_user.id, "Разработчики: в разработке!")
+    elif message.text == "/fact":
+        bot.send_message(message.from_user.id, "Факты: в разработке!")
     else:
         bot.send_message(message.from_user.id, text_of_messages.TEXT_ERROR_MESSAGE)
 
@@ -43,3 +45,4 @@ def show_bot_tasks(message):
 
 # Непрерывное прослушивание пользователя:
 bot.polling(none_stop=True, interval=0)
+bot.idle()
