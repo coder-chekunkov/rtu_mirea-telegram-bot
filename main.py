@@ -1,6 +1,7 @@
 import telebot
 from telebot import types
 import text_of_messages
+from Work_with_JSON import json_defs
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -29,7 +30,8 @@ def get_text_messages(message):
     elif message.text == "/prevention":
         bot.send_message(message.from_user.id, "Профилактика: в разработке!")
     elif message.text == "/questions":
-        bot.send_message(message.from_user.id, "Вопросы: в разработке!")
+        bot.send_message(message.from_user.id, json_defs.questions_print())
+        #json_defs.questions_read()
     elif message.text == "/develop":
         bot.send_message(message.from_user.id, "Разработчики: в разработке!")
     elif message.text == "/fact":
