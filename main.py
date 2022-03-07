@@ -30,6 +30,8 @@ def get_text_messages(message):
         show_prevention(message)
     elif message.text == "/questions":
         bot.send_message(message.from_user.id, "Вопросы: в разработке!")
+    elif message.text == "/news":
+        bot.send_message(message.from_user.id, "Новости: в разработке!")
     elif message.text == "/develop":
         show_develop(message)
     elif message.text == "/fact":
