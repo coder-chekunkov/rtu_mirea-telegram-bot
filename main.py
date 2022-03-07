@@ -1,7 +1,8 @@
 import telebot
 from telebot import types
-import text_of_messages
-from Work_with_JSON import json_defs
+from static_worker import text_of_messages
+from JSON_worker.question import questions_creator
+from JSON_worker.fact import facts_creator
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -30,12 +31,11 @@ def get_text_messages(message):
     elif message.text == "/prevention":
         bot.send_message(message.from_user.id, "Профилактика: в разработке!")
     elif message.text == "/questions":
-        bot.send_message(message.from_user.id, json_defs.questions_print())
-        #json_defs.questions_read()
+        show_questions(message)
     elif message.text == "/develop":
         bot.send_message(message.from_user.id, "Разработчики: в разработке!")
     elif message.text == "/fact":
-        bot.send_message(message.from_user.id, "Факты: в разработке!")
+        show_fact(message)
     else:
         bot.send_message(message.from_user.id, text_of_messages.TEXT_ERROR_MESSAGE)
 
@@ -43,6 +43,16 @@ def get_text_messages(message):
 # Метод отправки существующих задач:
 def show_bot_tasks(message):
     bot.send_message(message.from_user.id, text_of_messages.TEXT_TASKS, parse_mode="Markdown")
+
+
+# Метод вывода всех доступных вопросов:
+def show_questions(message):
+    bot.send_message(message.from_user.id, questions_creator.questions_print(), parse_mode="Markdown")
+
+
+# Метод вывода одного интересного факта:
+def show_fact(message):
+    bot.send_message(message.from_user.id, facts_creator.TEST_MESSAGE, parse_mode="Markdown")
 
 
 # Непрерывное прослушивание пользователя:
