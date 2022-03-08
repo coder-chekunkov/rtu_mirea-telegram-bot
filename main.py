@@ -52,7 +52,7 @@ def show_questions(message):
 
 # Метод вывода одного интересного факта:
 def show_fact(message):
-    bot.send_message(message.from_user.id, facts_creator.TEST_MESSAGE, parse_mode="Markdown")
+    bot.send_message(message.from_user.id, facts_creator.facts_print(), parse_mode="Markdown")
 
 
 # Непрерывное прослушивание пользователя:
