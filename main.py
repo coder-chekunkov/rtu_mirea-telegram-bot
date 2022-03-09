@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-from static_worker import text_of_messages
+from static_worker import text_of_messages, tags_cheking
 from JSON_worker.question import questions_creator
 from JSON_worker.fact import facts_creator
 
@@ -39,7 +39,7 @@ def get_text_messages(message):
     elif message.text == "/fact":
         show_fact(message)
     else:
-        bot.send_message(message.from_user.id, text_of_messages.TEXT_ERROR_MESSAGE)
+        show_answer(message)
 
 
 # Метод отправки существующих задач:
@@ -71,6 +71,40 @@ def show_questions(message):
 # Метод вывода одного интересного факта:
 def show_fact(message):
     bot.send_message(message.from_user.id, facts_creator.facts_print(), parse_mode="Markdown")
+
+
+# Метод вывода сообщения с дальнейшими действиями:
+def show_answer(message):
+    isFoundTag, tag = tags_cheking.tag_finder(message.text)
+    if isFoundTag:
+        # Запись конечного вопроса пользователю, в зависимости от тега:
+        buff_message = ""
+        if tag == "статистика":
+            buff_message = text_of_messages.TEXT_BUTTON_STATIC
+        elif tag == "новости":
+            buff_message = text_of_messages.TEXT_BUTTON_NEWS
+        elif tag == "симптомы":
+            buff_message = text_of_messages.TEXT_BUTTON_SYMPTOMS
+        elif tag == "профилактика":
+            buff_message = text_of_messages.TEXT_BUTTON_PREVENTION
+        elif tag == "вопросы":
+            buff_message = text_of_messages.TEXT_BUTTON_QUESTIONS
+        elif tag == "факт":
+            buff_message = text_of_messages.TEXT_BUTTON_FACTS
+        elif tag == "разработчики":
+            buff_message = text_of_messages.TEXT_BUTTON_DEVELOP
+
+        # Вывод вопроса и двух кнопок "да" или "нет":
+        keyboard_YES_NO = telebot.types.InlineKeyboardMarkup()
+        button_YES = telebot.types.InlineKeyboardButton(text_of_messages.TEXT_BUTTON_YES, callback_data='1',
+                                                        parse_mode="Markdown")
+        button_NO = telebot.types.InlineKeyboardButton(text_of_messages.TEXT_BUTTON_NO, callback_data='2',
+                                                       parse_mode="Markdown")
+        keyboard_YES_NO.row(button_YES, button_NO)
+        bot.send_message(message.from_user.id, buff_message,
+                         reply_markup=keyboard_YES_NO)
+    else:
+        bot.send_message(message.from_user.id, text_of_messages.TEXT_ERROR_MESSAGE)
 
 
 # Непрерывное прослушивание пользователя:
