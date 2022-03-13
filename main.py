@@ -1,7 +1,6 @@
 import telebot
 import emoji
 from telebot import types
-from static_worker import tags_cheking
 from JSON_worker.question import questions_creator
 from JSON_worker.fact import facts_creator
 from JSON_worker.text import text_creator
@@ -45,7 +44,8 @@ def get_text_messages(message):
     elif message.text == "/fact":
         show_fact(message)
     else:
-        show_answer(message)
+        TEXT_ERROR_MESSAGE = text_creator.get_text("error")
+        bot.send_message(message.from_user.id, TEXT_ERROR_MESSAGE)
 
 
 # Метод отправки существующих задач:
@@ -77,6 +77,7 @@ def show_develop(message):
 def show_questions(message):
     TEXT_QUESTIONS = questions_creator.questions_print()
     bot.send_message(message.from_user.id, TEXT_QUESTIONS, parse_mode="Markdown")
+    show_answers(message)
 
 
 # Метод вывода одного интересного факта:
@@ -85,45 +86,39 @@ def show_fact(message):
     bot.send_message(message.from_user.id, TEXT_FACT, parse_mode="Markdown")
 
 
-# Метод вывода сообщения с дальнейшими действиями:
-def show_answer(message):
-    # Текст для ввода "Да":
-    TEXT_BUTTON_YES = "Да " + emoji.emojize("✅")
+# Метод вывода кнопок для получения ответа на определенный вопрос:
+def show_answers(message):
+    buff_message = emoji.emojize(":keyboard:") + " Для того, чтобы получить ответ на вопрос нажмите на нужную кнопку."
+    keyboard_answers = telebot.types.InlineKeyboardMarkup()
 
-    # Текст для ввода "Нет":
-    TEXT_BUTTON_NO = "Нет " + emoji.emojize("❌")
+    numbers = [1, 2, 3, 4, 5]
+    for j in range(5):
+        buff_button_one = telebot.types.InlineKeyboardButton(str(numbers[0]), callback_data=str(numbers[0]),
+                                                             parse_mode="Markdown")
+        buff_button_two = telebot.types.InlineKeyboardButton(str(numbers[1]), callback_data=str(numbers[1]),
+                                                             parse_mode="Markdown")
+        buff_button_three = telebot.types.InlineKeyboardButton(str(numbers[2]), callback_data=str(numbers[2]),
+                                                               parse_mode="Markdown")
+        buff_button_four = telebot.types.InlineKeyboardButton(str(numbers[3]), callback_data=str(numbers[3]),
+                                                              parse_mode="Markdown")
+        buff_button_five = telebot.types.InlineKeyboardButton(str(numbers[4]), callback_data=str(numbers[4]),
+                                                              parse_mode="Markdown")
+        keyboard_answers.row(buff_button_one, buff_button_two, buff_button_three, buff_button_four, buff_button_five)
 
-    isFoundTag, tag = tags_cheking.tag_finder(message.text)
-    if isFoundTag:
-        # Запись конечного вопроса пользователю, в зависимости от тега:
-        buff_message = ""
-        if tag == "статистика":
-            buff_message = emoji.emojize(":bar_chart:") + " Вы хотите посмотреть статистику?"
-        elif tag == "новости":
-            buff_message = emoji.emojize(":bookmark_tabs:") + " Вы хотите посмотреть актуальные новости?"
-        elif tag == "симптомы":
-            buff_message = emoji.emojize("🤕") + " Вы хотите узнать о симптомах COVID-19?"
-        elif tag == "профилактика":
-            buff_message = emoji.emojize("😷") + " Вы хотите узнать о профилактики?"
-        elif tag == "вопросы":
-            buff_message = emoji.emojize("⁉️") + " Показать часто задаваемые вопросы?"
-        elif tag == "факт":
-            buff_message = emoji.emojize("🤔") + " Показать интересный факт?"
-        elif tag == "разработчики":
-            buff_message = emoji.emojize("🤔") + " Показать контакты разработчиков?"
+        for i in range(5):
+            numbers[i] += 5
 
-        # Вывод вопроса и двух кнопок "да" или "нет":
-        keyboard_YES_NO = telebot.types.InlineKeyboardMarkup()
-        button_YES = telebot.types.InlineKeyboardButton(TEXT_BUTTON_YES, callback_data='1',
-                                                        parse_mode="Markdown")
-        button_NO = telebot.types.InlineKeyboardButton(TEXT_BUTTON_NO, callback_data='2',
-                                                       parse_mode="Markdown")
-        keyboard_YES_NO.row(button_YES, button_NO)
-        bot.send_message(message.from_user.id, buff_message,
-                         reply_markup=keyboard_YES_NO)
-    else:
-        TEXT_ERROR_MESSAGE = text_creator.get_text("error")
-        bot.send_message(message.from_user.id, TEXT_ERROR_MESSAGE)
+    bot.send_message(message.from_user.id, buff_message, reply_markup=keyboard_answers)
+
+
+# Обработчик нажатия на кнопку:
+@bot.callback_query_handler(func=lambda call: True)
+def callback_data(call):
+    number_of_question = call.data
+    answer, question = questions_creator.answers_print(number_of_question)
+    message = "⁉️ *Ответ на вопрос №" + number_of_question + ":* " + question + "\n" + " " + "\n" + answer + \
+              "\n" + " " + "\n" + "🤤 Нажмите на другую кнопку, чтобы получить ответ на следующий вопрос."
+    bot.send_message(chat_id=call.message.chat.id, text=message, parse_mode="Markdown")
 
 
 # Непрерывное прослушивание пользователя:

@@ -14,15 +14,18 @@ def questions_print():
     for question in questions:
         all_Questions += "*" + (str(question['id']) + ".* " + question['question'] + "\n")
 
-    all_Questions += " " + "\n"
-    all_Questions += emoji.emojize(":keyboard:") + " Для того, чтобы получить ответ на вопрос введите его номер."
     return all_Questions
 
 
 # Функция для получения ответа на вопрос с id "number":
-def questions_read(number):
+def answers_print(number):
+    answer = " "
+    buff_question = " "
     with open('JSON_worker/question/questions.json', 'r', encoding='utf-8') as file:
         questions = json.load(file)
     for question in questions:
         if question['id'] == int(number):
-            print(question['title'])
+            answer = question['title']
+            buff_question = question['question']
+
+    return answer, buff_question
