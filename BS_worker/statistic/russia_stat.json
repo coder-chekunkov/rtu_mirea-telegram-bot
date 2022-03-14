@@ -1,0 +1,338 @@
+[
+  {
+    "country": "\u0412\u0435\u0441\u044c \u043c\u0438\u0440",
+    "info": {
+      "all_sick": "457 949 618",
+      "sick_per_day": "1 159 377",
+      "all_deaths": "6 044 192"
+    }
+  },
+  {
+    "country": "\u0420\u043e\u0441\u0441\u0438\u044f",
+    "info": {
+      "all_sick": "17 084 672",
+      "sick_per_day": "43 951",
+      "all_deaths": "353 635"
+    }
+  },
+  {
+    "country": "\u041c\u043e\u0441\u043a\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "950 816",
+      "sick_per_day": "747",
+      "all_deaths": "14 487"
+    }
+  },
+  {
+    "country": "\u0421\u0432\u0435\u0440\u0434\u043b\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "399 900",
+      "sick_per_day": "2 100",
+      "all_deaths": "10 417"
+    }
+  },
+  {
+    "country": "\u041d\u0438\u0436\u0435\u0433\u043e\u0440\u043e\u0434\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "392 173",
+      "sick_per_day": "1 107",
+      "all_deaths": "11 239"
+    }
+  },
+  {
+    "country": "\u0421\u0430\u043c\u0430\u0440\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "362 227",
+      "sick_per_day": "1 249",
+      "all_deaths": "7 301"
+    }
+  },
+  {
+    "country": "\u041a\u0440\u0430\u0441\u043d\u043e\u044f\u0440\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "353 006",
+      "sick_per_day": "479",
+      "all_deaths": "10 252"
+    }
+  },
+  {
+    "country": "\u0412\u043e\u0440\u043e\u043d\u0435\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "352 299",
+      "sick_per_day": "1 012",
+      "all_deaths": "7 915"
+    }
+  },
+  {
+    "country": "\u041f\u0435\u0440\u043c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "346 913",
+      "sick_per_day": "1 408",
+      "all_deaths": "8 527"
+    }
+  },
+  {
+    "country": "\u0420\u043e\u0441\u0442\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "346 285",
+      "sick_per_day": "987",
+      "all_deaths": "10 526"
+    }
+  },
+  {
+    "country": "\u0427\u0435\u043b\u044f\u0431\u0438\u043d\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "305 549",
+      "sick_per_day": "1 018",
+      "all_deaths": "7 181"
+    }
+  },
+  {
+    "country": "\u0418\u0440\u043a\u0443\u0442\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "269 169",
+      "sick_per_day": "1 528",
+      "all_deaths": "8 042"
+    }
+  },
+  {
+    "country": "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u0411\u0430\u0448\u043a\u043e\u0440\u0442\u043e\u0441\u0442\u0430\u043d",
+    "info": {
+      "all_sick": "260 621",
+      "sick_per_day": "1 987",
+      "all_deaths": "5 392"
+    }
+  },
+  {
+    "country": "\u0410\u043b\u0442\u0430\u0439\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "253 500",
+      "sick_per_day": "804",
+      "all_deaths": "8 251"
+    }
+  },
+  {
+    "country": "\u041d\u043e\u0432\u043e\u0441\u0438\u0431\u0438\u0440\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "244 687",
+      "sick_per_day": "871",
+      "all_deaths": "5 171"
+    }
+  },
+  {
+    "country": "\u041a\u0440\u0430\u0441\u043d\u043e\u0434\u0430\u0440\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "240 186",
+      "sick_per_day": "984",
+      "all_deaths": "10 538"
+    }
+  },
+  {
+    "country": "\u0421\u0430\u0440\u0430\u0442\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "227 499",
+      "sick_per_day": "1 478",
+      "all_deaths": "5 744"
+    }
+  },
+  {
+    "country": "\u0410\u0440\u0445\u0430\u043d\u0433\u0435\u043b\u044c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "220 655",
+      "sick_per_day": "367",
+      "all_deaths": "1 599"
+    }
+  },
+  {
+    "country": "\u0425\u0430\u043d\u0442\u044b-\u041c\u0430\u043d\u0441\u0438\u0439\u0441\u043a\u0438\u0439 \u0430\u0432\u0442\u043e\u043d\u043e\u043c\u043d\u044b\u0439 \u043e\u043a\u0440\u0443\u0433",
+    "info": {
+      "all_sick": "202 041",
+      "sick_per_day": "531",
+      "all_deaths": "2 459"
+    }
+  },
+  {
+    "country": "\u041e\u0440\u0435\u043d\u0431\u0443\u0440\u0433\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "201 630",
+      "sick_per_day": "832",
+      "all_deaths": "3 792"
+    }
+  },
+  {
+    "country": "\u0412\u043e\u043b\u0433\u043e\u0433\u0440\u0430\u0434\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "198 888",
+      "sick_per_day": "963",
+      "all_deaths": "6 558"
+    }
+  },
+  {
+    "country": "\u041e\u043c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "197 858",
+      "sick_per_day": "389",
+      "all_deaths": "3 996"
+    }
+  },
+  {
+    "country": "\u0421\u0442\u0430\u0432\u0440\u043e\u043f\u043e\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "189 028",
+      "sick_per_day": "254",
+      "all_deaths": "6 899"
+    }
+  },
+  {
+    "country": "\u0425\u0430\u0431\u0430\u0440\u043e\u0432\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "188 438",
+      "sick_per_day": "902",
+      "all_deaths": "1 472"
+    }
+  },
+  {
+    "country": "\u0423\u043b\u044c\u044f\u043d\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "185 373",
+      "sick_per_day": "891",
+      "all_deaths": "4 465"
+    }
+  },
+  {
+    "country": "\u0422\u044e\u043c\u0435\u043d\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "177 965",
+      "sick_per_day": "735",
+      "all_deaths": "4 066"
+    }
+  },
+  {
+    "country": "\u041b\u0435\u043d\u0438\u043d\u0433\u0440\u0430\u0434\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "177 188",
+      "sick_per_day": "393",
+      "all_deaths": "3 400"
+    }
+  },
+  {
+    "country": "\u0412\u043e\u043b\u043e\u0433\u043e\u0434\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "177 008",
+      "sick_per_day": "701",
+      "all_deaths": "3 507"
+    }
+  },
+  {
+    "country": "\u041f\u0435\u043d\u0437\u0435\u043d\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "170 524",
+      "sick_per_day": "768",
+      "all_deaths": "5 429"
+    }
+  },
+  {
+    "country": "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u0421\u0430\u0445\u0430 (\u042f\u043a\u0443\u0442\u0438\u044f)",
+    "info": {
+      "all_sick": "166 355",
+      "sick_per_day": "423",
+      "all_deaths": "2 059"
+    }
+  },
+  {
+    "country": "\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u041a\u043e\u043c\u0438",
+    "info": {
+      "all_sick": "164 606",
+      "sick_per_day": "334",
+      "all_deaths": "2 998"
+    }
+  },
+  {
+    "country": "\u041f\u0440\u0438\u043c\u043e\u0440\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "164 356",
+      "sick_per_day": "571",
+      "all_deaths": "1 855"
+    }
+  },
+  {
+    "country": "\u0423\u0434\u043c\u0443\u0440\u0442\u0441\u043a\u0430\u044f \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430",
+    "info": {
+      "all_sick": "158 381",
+      "sick_per_day": "364",
+      "all_deaths": "3 702"
+    }
+  },
+  {
+    "country": "\u0417\u0430\u0431\u0430\u0439\u043a\u0430\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0440\u0430\u0439",
+    "info": {
+      "all_sick": "158 300",
+      "sick_per_day": "813",
+      "all_deaths": "2 226"
+    }
+  },
+  {
+    "country": "\u041a\u0430\u043b\u0438\u043d\u0438\u043d\u0433\u0440\u0430\u0434\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "157 638",
+      "sick_per_day": "509",
+      "all_deaths": "1 693"
+    }
+  },
+  {
+    "country": "\u0422\u0432\u0435\u0440\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "152 964",
+      "sick_per_day": "375",
+      "all_deaths": "2 641"
+    }
+  },
+  {
+    "country": "\u0411\u0440\u044f\u043d\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "152 587",
+      "sick_per_day": "341",
+      "all_deaths": "3 613"
+    }
+  },
+  {
+    "country": "\u041a\u0435\u043c\u0435\u0440\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "152 113",
+      "sick_per_day": "490",
+      "all_deaths": "2 190"
+    }
+  },
+  {
+    "country": "\u042f\u0440\u043e\u0441\u043b\u0430\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "147 714",
+      "sick_per_day": "555",
+      "all_deaths": "2 583"
+    }
+  },
+  {
+    "country": "\u041a\u0438\u0440\u043e\u0432\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "146 566",
+      "sick_per_day": "322",
+      "all_deaths": "917"
+    }
+  },
+  {
+    "country": "\u0422\u0443\u043b\u044c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "144 548",
+      "sick_per_day": "379",
+      "all_deaths": "4 947"
+    }
+  },
+  {
+    "country": "\u0412\u043b\u0430\u0434\u0438\u043c\u0438\u0440\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+    "info": {
+      "all_sick": "143 032",
+      "sick_per_day": "428",
+      "all_deaths": "3 285"
+    }
+  }
+]

@@ -4,6 +4,7 @@ from telebot import types
 from JSON_worker.question import questions_creator
 from JSON_worker.fact import facts_creator
 from JSON_worker.text import text_creator
+from BS_worker.statistic import statistic_creator
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -30,7 +31,7 @@ def get_text_messages(message):
     if message.text == TEXT_BUTTON_TASKS:
         show_bot_tasks(message)
     elif message.text == "/stat":
-        bot.send_message(message.from_user.id, "Статистика: в разработке!")
+        show_statistic(message)
     elif message.text == "/symptoms":
         show_symptoms(message)
     elif message.text == "/prevention":
@@ -46,6 +47,21 @@ def get_text_messages(message):
     else:
         TEXT_ERROR_MESSAGE = text_creator.get_text("error")
         bot.send_message(message.from_user.id, TEXT_ERROR_MESSAGE)
+
+
+def show_statistic(message):
+    buff_russia = "Россия " + emoji.emojize("🇷🇺")
+    buff_world = "Мир " + emoji.emojize("🌐")
+    buff_message = emoji.emojize("📊") + " Выберите статистику нужного региона:"
+
+    keyboard_statistic = telebot.types.InlineKeyboardMarkup()
+    button_russia = telebot.types.InlineKeyboardButton(text=buff_russia, callback_data="russia",
+                                                       parse_mode="Markdown")
+    button_world = telebot.types.InlineKeyboardButton(text=buff_world, callback_data="world",
+                                                      parse_mode="Markdown")
+
+    keyboard_statistic.add(button_russia, button_world)
+    bot.send_message(message.from_user.id, buff_message, reply_markup=keyboard_statistic)
 
 
 # Метод отправки существующих задач:
@@ -114,11 +130,17 @@ def show_answers(message):
 # Обработчик нажатия на кнопку:
 @bot.callback_query_handler(func=lambda call: True)
 def callback_data(call):
-    number_of_question = call.data
-    answer, question = questions_creator.answers_print(number_of_question)
-    message = "⁉️ *Ответ на вопрос №" + number_of_question + ":* " + question + "\n" + " " + "\n" + answer + \
-              "\n" + " " + "\n" + "🤤 Нажмите на другую кнопку, чтобы получить ответ на следующий вопрос."
-    bot.send_message(chat_id=call.message.chat.id, text=message, parse_mode="Markdown")
+    if call.data != "russia" and call.data != "world":
+        number_of_question = call.data
+        answer, question = questions_creator.answers_print(number_of_question)
+        message = "⁉️ *Ответ на вопрос №" + number_of_question + ":* " + question + "\n" + " " + "\n" + answer + \
+                  "\n" + " " + "\n" + "🤤 Нажмите на другую кнопку, чтобы получить ответ на следующий вопрос."
+        bot.send_message(chat_id=call.message.chat.id, text=message, parse_mode="Markdown")
+    else:
+        if call.data == "russia":
+            message_russia, message_region = statistic_creator.get_statistic_russia()
+            bot.send_message(chat_id=call.message.chat.id, text=message_russia, parse_mode="Markdown")
+            bot.send_message(chat_id=call.message.chat.id, text=message_region, parse_mode="Markdown")
 
 
 # Непрерывное прослушивание пользователя:
