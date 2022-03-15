@@ -52,9 +52,6 @@ def stat_print():
 stat_create()
 statistic = json.load(open('JSON_worker/stat/stat.json'))       # Открытие и расшифровка JSON файла
 
-for stat in statistic:
-    print(f'{stat}')
-print('\n')
 
 stat_print()
 
