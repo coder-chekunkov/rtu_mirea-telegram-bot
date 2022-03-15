@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import emoji
 
-# Данный скрипт используется для получения статистики COVID-19.
+# Данный скрипт используется для получения статистики COVID-19 по России.
 
 # Регистрация ссылки от куда берется статистика:
 URL = 'https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU%3Aru&mid=%2Fm%2F06bnz'
@@ -11,6 +11,7 @@ response = requests.get(URL)
 soup = BeautifulSoup(response.content, 'html.parser')
 
 
+# Получение статистики по РФ с помощью BeautifulSoup:
 def get_statistic_russia():
     russia_statistic = []
 
@@ -37,6 +38,7 @@ def get_statistic_russia():
     return message_russia, message_region
 
 
+# Создание сообщений со статистикой по регионам и общей статистикой:
 def show_stat_russia():
     message = emoji.emojize("🇷🇺") + " Статистика заболеваемости по *России*:" + "\n" + " " + "\n"
     message_region = emoji.emojize("🧭") + " ТОП-10 *областей и регионов* по заболеваемости:" + "\n" + " " + "\n"

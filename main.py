@@ -4,7 +4,8 @@ from telebot import types
 from JSON_worker.question import questions_creator
 from JSON_worker.fact import facts_creator
 from JSON_worker.text import text_creator
-from BS_worker.statistic import statistic_creator
+from BS_worker.statistic.world import world_statistic_creator
+from BS_worker.statistic.russia import russia_statistic_creator
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -49,9 +50,10 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, TEXT_ERROR_MESSAGE)
 
 
+# Метод отправки статистики по миру и России:
 def show_statistic(message):
     buff_russia = "Россия " + emoji.emojize("🇷🇺")
-    buff_world = "Мир " + emoji.emojize("🌐")
+    buff_world = "Мир " + emoji.emojize("🌎")
     buff_message = emoji.emojize("📊") + " Выберите статистику нужного региона:"
 
     keyboard_statistic = telebot.types.InlineKeyboardMarkup()
@@ -138,9 +140,13 @@ def callback_data(call):
         bot.send_message(chat_id=call.message.chat.id, text=message, parse_mode="Markdown")
     else:
         if call.data == "russia":
-            message_russia, message_region = statistic_creator.get_statistic_russia()
+            message_russia, message_region = russia_statistic_creator.get_statistic_russia()
             bot.send_message(chat_id=call.message.chat.id, text=message_russia, parse_mode="Markdown")
             bot.send_message(chat_id=call.message.chat.id, text=message_region, parse_mode="Markdown")
+        if call.data == "world":
+            message_world, message_countries = world_statistic_creator.get_statistic_world()
+            bot.send_message(chat_id=call.message.chat.id, text=message_world, parse_mode="Markdown")
+            bot.send_message(chat_id=call.message.chat.id, text=message_countries, parse_mode="Markdown")
 
 
 # Непрерывное прослушивание пользователя:
