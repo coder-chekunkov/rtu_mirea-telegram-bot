@@ -9,5 +9,8 @@ def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
         crontab(hour=12),
         parse_countries.stat_create(),
-        parse_news.stat_create()
+    )
+    sender.add_periodic_task(
+        crontab(hour=2),
+        parse_news.get_news()
     )

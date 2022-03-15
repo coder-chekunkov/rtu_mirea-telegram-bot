@@ -9,26 +9,40 @@ response = requests.get(URL)
 soup = BeautifulSoup(response.content, 'html.parser')
 
 
-def stat_create():
-        slovar = {}
-        slovar_spisok = []
-        headings = soup.find_all('a', {'class': 'DY5T1d RZIKme'}, limit=10)    # Заполнение списка названия стран парсингом
-        #hrefs = soup.find_all('td', {'class': 'l3HOY'})        # Заполнение списка значений свойств парсингом
+def get_news():
+    news_list = []
+    headings = soup.find_all('a', {'class': 'DY5T1d RZIKme'}, limit=10)  # Заполнение списка названия стран парсингом
 
-        for header in headings:
-            # Создание словаря по образу
-            slovar = {'news': header.text.replace(u'\xa0', ' '), 'href': ('https://news.google.com'  + header.attrs.get("href").replace('.', '', 1))}
-            slovar_spisok.append(slovar)                        # Добавление словаря в список ему подобных
+    for header in headings:
+        # Создание словаря по образу
+        slovar = {'header': header.text.replace(u'\xa0', ' '),
+                  'href': ('https://news.google.com' + header.attrs.get("href").replace('.', '', 1))}
+        news_list.append(slovar)  # Добавление словаря в список ему подобных
 
-        with open('JSON_worker/news/news.json', 'w', encoding='utf-8') as write_file:
-            json.dump(slovar_spisok, write_file)
+    with open('JSON_worker/news/news.json', 'w', encoding='utf-8') as write_file:
+        json.dump(news_list, write_file)
 
-
-stat_create()
-
-news = json.load(open('JSON_worker/news/news.json'))
-
-for new in news:
-    print(f'{new["news"]}:   {new["href"]}\n')
+    message = show_news()
+    return message
 
 
+def show_news():
+    message = "Новости за последние 2 часа: \n"
+
+    with open('JSON_worker/news/news.json', 'r', encoding='utf-8') as read_file:
+        news = json.load(read_file)
+        for new in news:
+            header = new['header']
+            href = new['href']
+            message+= header + '\n' + href + '\n'
+    return message
+
+
+
+
+
+
+#news = json.load(open('JSON_worker/news/news.json'))
+
+#for new in news:
+#    print(f'{new["news"]}:   {new["href"]}\n')

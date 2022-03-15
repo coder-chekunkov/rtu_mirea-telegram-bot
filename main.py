@@ -3,6 +3,7 @@ from telebot import types
 from static_worker import text_of_messages
 from JSON_worker.question import questions_creator
 from JSON_worker.fact import facts_creator
+import parse_news
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -33,7 +34,7 @@ def get_text_messages(message):
     elif message.text == "/questions":
         show_questions(message)
     elif message.text == "/news":
-        bot.send_message(message.from_user.id, "Новости: в разработке!")
+        bot.send_message(message.from_user.id, parse_news.get_news())
     elif message.text == "/develop":
         show_develop(message)
     elif message.text == "/fact":
