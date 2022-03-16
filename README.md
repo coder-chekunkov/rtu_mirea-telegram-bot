@@ -6,15 +6,14 @@
 
 ---
  
- **Телеграм бот "COVID-19"**    <br/>
+🤖 **Telegram Bot "COVID-19"** 
 
- <img align="right" alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/image_004.jpg" width="170" />
+ <img align="right" alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_004-1.png" width="170" />
  
 🦠 Бот используется для получения информации о **"COVID-19"**. <br/>
 🐍 Данный бот был написан на языке программирования **"Python 3.9"**. <br/>
 🧑‍💻 Данный бот **разработан** [coder-chekunkov](https://github.com/coder-chekunkov) и [XmuRi1](https://github.com/XmuRi1). <br/>
 📫 Разработчики **всегда рады услышать** отзыв и мнение о данном проекте. <br/>
-👀 Количетсво **посещений**: ![visitor badge](https://visitor-badge.glitch.me/badge?page_id=coder-chekunkov.covid19-telegram-bot)
+👀 Количетсво **посещений**: ![](https://visitor-badge.glitch.me/badge?page_id=coder-chekunkov.covid19-telegram-bot)
 
-🤖 **Что умеет Телеграм бот и как им пользоваться?**
-
+🔋 **Что умеет Телеграм бот и как им пользоваться?**
