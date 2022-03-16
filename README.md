@@ -6,7 +6,10 @@
 
 ---
  
-🤖 **Telegram Bot "COVID-19"** 
+ <p align="center">
+ 🤖 <b> Telegram Bot "COVID-19"</b>  
+ </p>
+ 
 
  <img align="right" alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_004-1.png" width="170" />
  
