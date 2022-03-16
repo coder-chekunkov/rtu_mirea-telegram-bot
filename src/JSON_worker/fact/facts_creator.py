@@ -10,7 +10,7 @@ def facts_print():
     index = random.randint(1, 36)
     all_Facts = emoji.emojize("🤔") + " Интересный факт *№ " + str(index) + "*:" + "\n" + " " + "\n"
 
-    with open("JSON_worker/fact/facts.json", "r", encoding='utf-8') as file:
+    with open("src/JSON_worker/fact/facts.json", "r", encoding='utf-8') as file:
         facts = json.load(file)
     for fact in facts:
         if fact['id'] == index:

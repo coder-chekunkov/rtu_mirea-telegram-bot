@@ -31,7 +31,7 @@ def get_statistic_russia():
         a_day += 5
         death += 5
 
-    with open("BS_worker/statistic/russia/russia_stat.json", 'w', encoding='utf-8') as write_file:
+    with open("src/BS_worker/statistic/russia/russia_stat.json", 'w', encoding='utf-8') as write_file:
         json.dump(russia_statistic, write_file)
 
     message_russia, message_region = show_stat_russia()
@@ -44,7 +44,7 @@ def show_stat_russia():
     message_region = emoji.emojize("🧭") + " ТОП-10 *областей и регионов* по заболеваемости:" + "\n" + " " + "\n"
     buff_counter = 1
 
-    with open("BS_worker/statistic/russia/russia_stat.json", "r", encoding='utf-8') as file:
+    with open("src/BS_worker/statistic/russia/russia_stat.json", "r", encoding='utf-8') as file:
         statistic = json.load(file)
         for stat in statistic:
             if stat["country"] == "Россия":

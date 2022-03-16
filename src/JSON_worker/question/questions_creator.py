@@ -9,7 +9,7 @@ import emoji
 def questions_print():
     all_Questions = emoji.emojize("⁉️") + " Часто задаваемые вопросы:" + "\n" + " " + "\n"
 
-    with open('JSON_worker/question/questions.json', 'r', encoding='utf-8') as file:
+    with open('src/JSON_worker/question/questions.json', 'r', encoding='utf-8') as file:
         questions = json.load(file)
     for question in questions:
         all_Questions += "*" + (str(question['id']) + ".* " + question['question'] + "\n")
@@ -21,7 +21,7 @@ def questions_print():
 def answers_print(number):
     answer = " "
     buff_question = " "
-    with open('JSON_worker/question/questions.json', 'r', encoding='utf-8') as file:
+    with open('src/JSON_worker/question/questions.json', 'r', encoding='utf-8') as file:
         questions = json.load(file)
     for question in questions:
         if question['id'] == int(number):

@@ -31,7 +31,7 @@ def get_statistic_world():
         a_day += 5
         death += 5
 
-    with open("BS_worker/statistic/world/world_stat.json", 'w', encoding='utf-8') as write_file:
+    with open("src/BS_worker/statistic/world/world_stat.json", 'w', encoding='utf-8') as write_file:
         json.dump(world_statistic, write_file)
 
     message_all, message_countries = show_stat_world()
@@ -44,7 +44,7 @@ def show_stat_world():
     message_countries = emoji.emojize("🧭") + " ТОП-10 *стран* по заболеваемости: \n" + " \n"
     buff_counter = 1
 
-    with open("BS_worker/statistic/world/world_stat.json", "r", encoding="utf-8") as file:
+    with open("src/BS_worker/statistic/world/world_stat.json", "r", encoding="utf-8") as file:
         statistic = json.load(file)
         for stat in statistic:
             if stat["country"] == "Весь мир":
