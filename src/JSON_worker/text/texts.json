@@ -1,26 +1,26 @@
 [
   {
     "tag": "start_message",
-    "link": "src/JSON_worker/text/documents/START_MESSAGE.md"
+    "link": "JSON_worker/text/documents/START_MESSAGE.md"
   },
   {
     "tag": "tasks",
-    "link": "src/JSON_worker/text/documents/TEXT_TASKS.md"
+    "link": "JSON_worker/text/documents/TEXT_TASKS.md"
   },
   {
     "tag": "develop",
-    "link": "src/JSON_worker/text/documents/TEXT_DEVELOP.md"
+    "link": "JSON_worker/text/documents/TEXT_DEVELOP.md"
   },
   {
     "tag": "error",
-    "link": "src/JSON_worker/text/documents/TEXT_ERROR_MESSAGE.md"
+    "link": "JSON_worker/text/documents/TEXT_ERROR_MESSAGE.md"
   },
   {
     "tag": "prevention",
-    "link": "src/JSON_worker/text/documents/TEXT_PREVENTION.md"
+    "link": "JSON_worker/text/documents/TEXT_PREVENTION.md"
   },
   {
     "tag": "symptoms",
-    "link": "src/JSON_worker/text/documents/TEXT_SYMPTOMS.md"
+    "link": "JSON_worker/text/documents/TEXT_SYMPTOMS.md"
   }
 ]

@@ -1,3 +1,6 @@
+import threading
+import time
+import schedule
 import telebot
 import emoji
 from telebot import types
@@ -14,6 +17,8 @@ bot = telebot.TeleBot(token)
 # Текст для вывода задач:
 TEXT_BUTTON_TASKS = "Посмотреть доступные задачи " + emoji.emojize(":card_index_dividers:")
 
+all_users = set()
+
 
 # Метод отправки "приветственного сообщения"
 # и вывод кнопки с возможными задачами:
@@ -24,6 +29,8 @@ def menu(message):
     keyboard.add(button_tasks)
     START_MESSAGE = text_creator.get_text("start_message")
     bot.send_message(message.from_user.id, START_MESSAGE, reply_markup=keyboard)
+    all_users.add(message.from_user.id)
+    print(all_users)
 
 
 # Метод "прослушивания" чата:
@@ -104,6 +111,28 @@ def show_fact(message):
     bot.send_message(message.from_user.id, TEXT_FACT, parse_mode="Markdown")
 
 
+# Проверка времени:
+def check_time():
+    schedule.every().day.at("12:30").do(show_every_day_message)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+
+# Метод вывода ежедневного сообщения с обновленной статисткой заболеваемости:
+def show_every_day_message():
+    russia_statistic_creator.get_statistic_russia()
+    world_statistic_creator.get_statistic_world()
+
+    TEXT_MESSAGE = "📊 Обновленная статистка заболеваемости *COVID-19*: \n \n"
+    TEXT_MESSAGE += russia_statistic_creator.show_stat_russia_every_day() + "\n \n"
+    TEXT_MESSAGE += world_statistic_creator.show_stat_world_every_day() + "\n \n"
+    TEXT_MESSAGE += "⌨ Введите \"/stat\" для отображения более подробной информации о статистке заболеваемости."
+
+    for user in all_users:
+        bot.send_message(user, TEXT_MESSAGE, parse_mode="Markdown")
+
+
 # Метод вывода кнопок для получения ответа на определенный вопрос:
 def show_answers(message):
     buff_message = emoji.emojize(":keyboard:") + " Для того, чтобы получить ответ на вопрос нажмите на нужную кнопку."
@@ -140,14 +169,16 @@ def callback_data(call):
         bot.send_message(chat_id=call.message.chat.id, text=message, parse_mode="Markdown")
     else:
         if call.data == "russia":
-            message_russia, message_region = russia_statistic_creator.get_statistic_russia()
+            message_russia, message_region = russia_statistic_creator.show_stat_russia()
             bot.send_message(chat_id=call.message.chat.id, text=message_russia, parse_mode="Markdown")
             bot.send_message(chat_id=call.message.chat.id, text=message_region, parse_mode="Markdown")
         if call.data == "world":
-            message_world, message_countries = world_statistic_creator.get_statistic_world()
+            message_world, message_countries = world_statistic_creator.show_stat_world()
             bot.send_message(chat_id=call.message.chat.id, text=message_world, parse_mode="Markdown")
             bot.send_message(chat_id=call.message.chat.id, text=message_countries, parse_mode="Markdown")
 
 
 # Непрерывное прослушивание пользователя:
+my_thread = threading.Thread(target=check_time)
+my_thread.start()
 bot.polling(none_stop=True, interval=0)

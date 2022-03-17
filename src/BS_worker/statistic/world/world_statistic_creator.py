@@ -31,11 +31,8 @@ def get_statistic_world():
         a_day += 5
         death += 5
 
-    with open("src/BS_worker/statistic/world/world_stat.json", 'w', encoding='utf-8') as write_file:
+    with open("BS_worker/statistic/world/world_stat.json", 'w', encoding='utf-8') as write_file:
         json.dump(world_statistic, write_file)
-
-    message_all, message_countries = show_stat_world()
-    return message_all, message_countries
 
 
 # Создание сообщений со статистикой по странам и общей статистикой:
@@ -44,7 +41,7 @@ def show_stat_world():
     message_countries = emoji.emojize("🧭") + " ТОП-10 *стран* по заболеваемости: \n" + " \n"
     buff_counter = 1
 
-    with open("src/BS_worker/statistic/world/world_stat.json", "r", encoding="utf-8") as file:
+    with open("BS_worker/statistic/world/world_stat.json", "r", encoding="utf-8") as file:
         statistic = json.load(file)
         for stat in statistic:
             if stat["country"] == "Весь мир":
@@ -101,3 +98,17 @@ def get_emoji_country(name_region):
         return "🇰🇷"
     else:
         return "🌐"
+
+
+def show_stat_world_every_day():
+    message = emoji.emojize("🌎") + " Статистика заболеваемости по *Миру*: \n"
+
+    with open("BS_worker/statistic/world/world_stat.json", "r", encoding="utf-8") as file:
+        statistic = json.load(file)
+        for stat in statistic:
+            if stat["country"] == "Весь мир":
+                all_sick = stat["info"]["all_sick"]
+                sick_per_day = stat["info"]["sick_per_day"]
+                message += "*Все случаи заболевания:* " + all_sick + "\n"
+                message += "*Случае заболевания за день:* " + sick_per_day + "\n"
+    return message
