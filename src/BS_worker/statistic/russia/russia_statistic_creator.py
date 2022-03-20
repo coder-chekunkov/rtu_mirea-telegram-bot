@@ -23,25 +23,33 @@ def get_statistic_russia():
 
     for tag in tags:
         statistic = {'country': tag.text.replace(u'\xa0', ' '),
-                     "info": {'all_sick': values[all_sick].text.replace(u'\xa0', ' '),
-                              'sick_per_day': values[a_day].text.replace(u'\xa0', ' '),
-                              'all_deaths': values[death].text.replace(u'\xa0', ' ')}}
+                     "info": {
+                         'all_sick': values[all_sick].text.replace(u'\xa0',
+                                                                   ' '),
+                         'sick_per_day': values[a_day].text.replace(u'\xa0',
+                                                                    ' '),
+                         'all_deaths': values[death].text.replace(u'\xa0',
+                                                                  ' ')}}
         russia_statistic.append(statistic)
         all_sick += 5
         a_day += 5
         death += 5
 
-    with open("BS_worker/statistic/russia/russia_stat.json", 'w', encoding='utf-8') as write_file:
+    with open("BS_worker/statistic/russia/russia_stat.json", 'w',
+              encoding='utf-8') as write_file:
         json.dump(russia_statistic, write_file)
 
 
 # Создание сообщений со статистикой по регионам и общей статистикой:
 def show_stat_russia():
-    message = emoji.emojize("🇷🇺") + " Статистика заболеваемости по *России*:" + "\n" + " " + "\n"
-    message_region = emoji.emojize("🧭") + " ТОП-10 *областей и регионов* по заболеваемости:" + "\n" + " " + "\n"
+    message = emoji.emojize(
+        "🇷🇺") + " Статистика заболеваемости по *России*:" + "\n" + " " + "\n"
+    message_region = emoji.emojize(
+        "🧭") + " ТОП-10 *областей и регионов* по заболеваемости:" + "\n" + " " + "\n"
     buff_counter = 1
 
-    with open("BS_worker/statistic/russia/russia_stat.json", "r", encoding='utf-8') as file:
+    with open("BS_worker/statistic/russia/russia_stat.json", "r",
+              encoding='utf-8') as file:
         statistic = json.load(file)
         for stat in statistic:
             if stat["country"] == "Россия":
@@ -52,12 +60,14 @@ def show_stat_russia():
                 message += "*Случае заболевания за день:* " + sick_per_day + "\n"
                 message += "*Все случаи летального исхода:* " + all_deaths + "\n"
 
-            if stat["country"] != "Россия" and stat["country"] != "Весь мир" and buff_counter <= 10:
+            if stat["country"] != "Россия" and stat[
+                "country"] != "Весь мир" and buff_counter <= 10:
                 name_region = stat["country"]
                 all_sick = stat["info"]["all_sick"]
                 sick_per_day = stat["info"]["sick_per_day"]
                 all_deaths = stat["info"]["all_deaths"]
-                message_region += "*" + str(buff_counter) + ". " + name_region + ":* " + "\n"
+                message_region += "*" + str(
+                    buff_counter) + ". " + name_region + ":* " + "\n"
                 message_region += "Все случаи заболевания: " + all_sick + "; " + "\n"
                 message_region += "Случае заболевания за день: " + sick_per_day + "; " + "\n"
                 message_region += "Все случаи летального исхода: " + all_deaths + "; " + "\n"
@@ -67,9 +77,11 @@ def show_stat_russia():
 
 
 def show_stat_russia_every_day():
-    message = emoji.emojize("🇷🇺") + " Статистика заболеваемости по *России* : \n"
+    message = emoji.emojize(
+        "🇷🇺") + " Статистика заболеваемости по *России* : \n"
 
-    with open("BS_worker/statistic/russia/russia_stat.json", "r", encoding='utf-8') as file:
+    with open("BS_worker/statistic/russia/russia_stat.json", "r",
+              encoding='utf-8') as file:
         statistic = json.load(file)
         for stat in statistic:
             if stat["country"] == "Россия":

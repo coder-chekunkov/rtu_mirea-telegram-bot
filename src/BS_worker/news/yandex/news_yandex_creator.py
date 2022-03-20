@@ -22,7 +22,8 @@ def get_yandex_news():
                 'href': (header.attrs.get("href"))}
         news_list.append(news)
 
-    with open("news_yandex.json", "w", encoding="utf-8") as write_file:
+    with open("BS_worker/news/yandex/news_yandex.json", "w",
+              encoding="utf-8") as write_file:
         json.dump(news_list, write_file)
 
     message = show_yandex_news()
@@ -31,18 +32,18 @@ def get_yandex_news():
 
 # Создание сообщения со всеми новостями:
 def show_yandex_news():
-    message = emoji.emojize("📑") + " Самые актуальные новости с сайта \"yandex.ru\": \n \n"
+    message = emoji.emojize(
+        "📑") + " Самые актуальные новости с сайта \"yandex.ru\": \n \n"
     buff_counter = 1
 
-    with open("news_yandex.json", "r", encoding="utf-8") as read_file:
+    with open("BS_worker/news/yandex/news_yandex.json", "r",
+              encoding="utf-8") as read_file:
         news = json.load(read_file)
         for new in news:
             if new['header'] is not None:
                 header = new['header']
                 href = new['href']
-                message += '*' + str(buff_counter) + ".* [" + header + "]" + "(" + href + ").\n \n"
+                message += '*' + str(
+                    buff_counter) + ".* [" + header + "]" + "(" + href + ").\n \n"
                 buff_counter += 1
     return message
-
-
-get_yandex_news()

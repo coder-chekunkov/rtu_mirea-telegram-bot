@@ -23,25 +23,33 @@ def get_statistic_world():
 
     for tag in tags:
         statistic = {'country': tag.text.replace(u'\xa0', ' '),
-                     "info": {'all_sick': values[all_sick].text.replace(u'\xa0', ' '),
-                              'sick_per_day': values[a_day].text.replace(u'\xa0', ' '),
-                              'all_deaths': values[death].text.replace(u'\xa0', ' ')}}
+                     "info": {
+                         'all_sick': values[all_sick].text.replace(u'\xa0',
+                                                                   ' '),
+                         'sick_per_day': values[a_day].text.replace(u'\xa0',
+                                                                    ' '),
+                         'all_deaths': values[death].text.replace(u'\xa0',
+                                                                  ' ')}}
         world_statistic.append(statistic)
         all_sick += 5
         a_day += 5
         death += 5
 
-    with open("BS_worker/statistic/world/world_stat.json", 'w', encoding='utf-8') as write_file:
+    with open("BS_worker/statistic/world/world_stat.json", 'w',
+              encoding='utf-8') as write_file:
         json.dump(world_statistic, write_file)
 
 
 # Создание сообщений со статистикой по странам и общей статистикой:
 def show_stat_world():
-    message = emoji.emojize("🌎") + " Общая статистика заболеваемости по *Миру*: \n" + " \n"
-    message_countries = emoji.emojize("🧭") + " ТОП-10 *стран* по заболеваемости: \n" + " \n"
+    message = emoji.emojize(
+        "🌎") + " Общая статистика заболеваемости по *Миру*: \n" + " \n"
+    message_countries = emoji.emojize(
+        "🧭") + " ТОП-10 *стран* по заболеваемости: \n" + " \n"
     buff_counter = 1
 
-    with open("BS_worker/statistic/world/world_stat.json", "r", encoding="utf-8") as file:
+    with open("BS_worker/statistic/world/world_stat.json", "r",
+              encoding="utf-8") as file:
         statistic = json.load(file)
         for stat in statistic:
             if stat["country"] == "Весь мир":
@@ -103,7 +111,8 @@ def get_emoji_country(name_region):
 def show_stat_world_every_day():
     message = emoji.emojize("🌎") + " Статистика заболеваемости по *Миру*: \n"
 
-    with open("BS_worker/statistic/world/world_stat.json", "r", encoding="utf-8") as file:
+    with open("BS_worker/statistic/world/world_stat.json", "r",
+              encoding="utf-8") as file:
         statistic = json.load(file)
         for stat in statistic:
             if stat["country"] == "Весь мир":

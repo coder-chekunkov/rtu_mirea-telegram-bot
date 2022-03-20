@@ -19,10 +19,12 @@ def get_google_news():
 
     for header in headings:
         news = {'header': header.text.replace(u'\xa0', ' '),
-                'href': ('https://news.google.com' + header.attrs.get("href").replace('.', '', 1))}
+                'href': ('https://news.google.com' + header.attrs.get(
+                    "href").replace('.', '', 1))}
         news_list.append(news)
 
-    with open("BS_worker/news/google/news_google.json", "w", encoding="utf-8") as write_file:
+    with open("BS_worker/news/google/news_google.json", "w",
+              encoding="utf-8") as write_file:
         json.dump(news_list, write_file)
 
     message = show_google_news()
@@ -31,14 +33,17 @@ def get_google_news():
 
 # Создание сообщения со всеми новостями:
 def show_google_news():
-    message = emoji.emojize("📑") + " Самые актуальные новости с сайта \"google.com\": \n \n"
+    message = emoji.emojize(
+        "📑") + " Самые актуальные новости с сайта \"google.com\": \n \n"
     buff_counter = 1
 
-    with open("BS_worker/news/google/news_google.json", "r", encoding="utf-8") as read_file:
+    with open("BS_worker/news/google/news_google.json", "r",
+              encoding="utf-8") as read_file:
         news = json.load(read_file)
         for new in news:
             header = new['header']
             href = new['href']
-            message += '*' + str(buff_counter) + ".* [" + header + "]" + "(" + href + ").\n \n"
+            message += '*' + str(
+                buff_counter) + ".* [" + header + "]" + "(" + href + ").\n \n"
             buff_counter += 1
     return message

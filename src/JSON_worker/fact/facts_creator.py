@@ -8,7 +8,8 @@ import emoji
 
 def facts_print():
     index = random.randint(1, 36)
-    all_Facts = emoji.emojize("🤔") + " Интересный факт *№ " + str(index) + "*:" + "\n" + " " + "\n"
+    all_Facts = emoji.emojize("🤔") + " Интересный факт *№ " + str(
+        index) + "*:" + "\n" + " " + "\n"
 
     with open("JSON_worker/fact/facts.json", "r", encoding='utf-8') as file:
         facts = json.load(file)
@@ -17,5 +18,6 @@ def facts_print():
             all_Facts += fact['fact'] + "\n"
 
     all_Facts += " " + "\n"
-    all_Facts += emoji.emojize(":keyboard:") + " Введите \"/fact\", чтобы получить еще один интересный факт о COVID-19."
+    all_Facts += emoji.emojize(
+        ":keyboard:") + " Введите \"/fact\", чтобы получить еще один интересный факт о COVID-19."
     return all_Facts
