@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import emoji
 
-# Данный скрипт используется для получения новостей COVID-19 по России.
+# Данный скрипт используется для получения новостей COVID-19 по России (google.com).
 
 
 # Регистрация ссылки от куда BS получает новости:
@@ -22,7 +22,7 @@ def get_google_news():
                 'href': ('https://news.google.com' + header.attrs.get("href").replace('.', '', 1))}
         news_list.append(news)
 
-    with open("BS_worker/news/news_google.json", 'w', encoding='utf-8') as write_file:
+    with open("BS_worker/news/google/news_google.json", "w", encoding="utf-8") as write_file:
         json.dump(news_list, write_file)
 
     message = show_google_news()
@@ -34,7 +34,7 @@ def show_google_news():
     message = emoji.emojize("📑") + " Самые актуальные новости с сайта \"google.com\": \n \n"
     buff_counter = 1
 
-    with open("BS_worker/news/news_google.json", 'r', encoding='utf-8') as read_file:
+    with open("BS_worker/news/google/news_google.json", "r", encoding="utf-8") as read_file:
         news = json.load(read_file)
         for new in news:
             header = new['header']
