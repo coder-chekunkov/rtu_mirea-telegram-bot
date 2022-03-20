@@ -9,6 +9,7 @@ from JSON_worker.fact import facts_creator
 from JSON_worker.text import text_creator
 from BS_worker.statistic.world import world_statistic_creator
 from BS_worker.statistic.russia import russia_statistic_creator
+from BS_worker.news import news_creator
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -47,7 +48,7 @@ def get_text_messages(message):
     elif message.text == "/questions":
         show_questions(message)
     elif message.text == "/news":
-        bot.send_message(message.from_user.id, "Новости: в разработке!")
+        show_news(message)
     elif message.text == "/develop":
         show_develop(message)
     elif message.text == "/fact":
@@ -70,6 +71,26 @@ def show_statistic(message):
                                                       parse_mode="Markdown")
 
     keyboard_statistic.add(button_russia, button_world)
+    bot.send_message(message.from_user.id, buff_message, reply_markup=keyboard_statistic)
+
+
+# Метод отправки новостей:
+def show_news(message):
+    buff_google = "1️⃣ google.com"
+    buff_two = "2️⃣ САЙТ №2"
+    buff_three = "3️⃣ САЙТ №3"
+    buff_message = emoji.emojize("📑") + " Выберите сайт, новости которого хотите посмотреть:"
+
+    keyboard_statistic = telebot.types.InlineKeyboardMarkup()
+    button_google = telebot.types.InlineKeyboardButton(text=buff_google, callback_data="google",
+                                                       parse_mode="Markdown")
+    keyboard_statistic.add(button_google)
+    button_two = telebot.types.InlineKeyboardButton(text=buff_two, callback_data="button_two",
+                                                    parse_mode="Markdown")
+    keyboard_statistic.add(button_two)
+    button_three = telebot.types.InlineKeyboardButton(text=buff_three, callback_data="button_three",
+                                                      parse_mode="Markdown")
+    keyboard_statistic.add(button_three)
     bot.send_message(message.from_user.id, buff_message, reply_markup=keyboard_statistic)
 
 
@@ -161,7 +182,7 @@ def show_answers(message):
 # Обработчик нажатия на кнопку:
 @bot.callback_query_handler(func=lambda call: True)
 def callback_data(call):
-    if call.data != "russia" and call.data != "world":
+    if call.data != "russia" and call.data != "world" and call.data != "google":
         number_of_question = call.data
         answer, question = questions_creator.answers_print(number_of_question)
         message = "⁉️ *Ответ на вопрос №" + number_of_question + ":* " + question + "\n" + " " + "\n" + answer + \
@@ -176,6 +197,11 @@ def callback_data(call):
             message_world, message_countries = world_statistic_creator.show_stat_world()
             bot.send_message(chat_id=call.message.chat.id, text=message_world, parse_mode="Markdown")
             bot.send_message(chat_id=call.message.chat.id, text=message_countries, parse_mode="Markdown")
+
+        if call.data == "google":
+            message_news_google = news_creator.get_google_news()
+            bot.send_message(chat_id=call.message.chat.id, text=message_news_google, parse_mode="Markdown",
+                             disable_web_page_preview=True)
 
 
 # Непрерывное прослушивание пользователя:
