@@ -37,7 +37,7 @@
    <b> 🖼️ Галерея и ссылка бота Telegram Bot "COVID-19" </b>  
 </p>
  
- 🔗 Для того чтобы посетить бота **перейдите** по [ссылке](https://t.me/covid19_mirea_bot) или в строке «Поиск» в Telegram **введите** "@covid19_mirea_bot".
+ 🔗 Для посещения бота **перейдите** по [ссылке](https://t.me/covid19_mirea_bot) или в строке «Поиск» **введите** "@covid19_mirea_bot".
  
 <p align="center">
  <img alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_001.jpg" width="250"/>
