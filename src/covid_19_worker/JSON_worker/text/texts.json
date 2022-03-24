@@ -1,0 +1,14 @@
+[
+  {
+    "tag": "tasks",
+    "link": "covid_19_worker/JSON_worker/text/documents/TEXT_TASKS.md"
+  },
+  {
+    "tag": "prevention",
+    "link": "covid_19_worker/JSON_worker/text/documents/TEXT_PREVENTION.md"
+  },
+  {
+    "tag": "symptoms",
+    "link": "covid_19_worker/JSON_worker/text/documents/TEXT_SYMPTOMS.md"
+  }
+]

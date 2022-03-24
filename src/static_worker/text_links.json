@@ -1,0 +1,18 @@
+[
+  {
+    "tag": "tasks",
+    "link": "static_worker/documents/TEXT_TASKS.md"
+  },
+  {
+    "tag": "start_message",
+    "link": "static_worker/documents/START_MESSAGE.md"
+  },
+  {
+    "tag": "develop",
+    "link": "static_worker/documents/TEXT_DEVELOP.md"
+  },
+  {
+    "tag": "error",
+    "link": "static_worker/documents/TEXT_ERROR_MESSAGE.md"
+  }
+]

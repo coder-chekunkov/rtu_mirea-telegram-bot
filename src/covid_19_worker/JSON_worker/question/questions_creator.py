@@ -10,7 +10,7 @@ def questions_print():
     all_Questions = emoji.emojize(
         "⁉️") + " Часто задаваемые вопросы:" + "\n" + " " + "\n"
 
-    with open('JSON_worker/question/questions.json', 'r',
+    with open('covid_19_worker/JSON_worker/question/questions.json', 'r',
               encoding='utf-8') as file:
         questions = json.load(file)
     for question in questions:
@@ -24,7 +24,7 @@ def questions_print():
 def answers_print(number):
     answer = " "
     buff_question = " "
-    with open('JSON_worker/question/questions.json', 'r',
+    with open('covid_19_worker/JSON_worker/question/questions.json', 'r',
               encoding='utf-8') as file:
         questions = json.load(file)
     for question in questions:

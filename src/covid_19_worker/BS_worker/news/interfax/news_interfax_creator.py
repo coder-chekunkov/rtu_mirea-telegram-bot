@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import emoji
 
-# Данный скрипт используется для получения новостей COVID-19 по России (interfax.ru).
+# Данный скрипт используется для получения новостей covid_19_worker по России (interfax.ru).
 
 # Регистрация ссылки от куда BS получает новости:
 
@@ -22,7 +22,7 @@ def get_interfax_news():
                 "href": 'https://interfax.ru' + header.attrs.get("href")}
         news_list.append(news)
 
-    with open("BS_worker/news/interfax/news_interfax.json", "w",
+    with open("covid_19_worker/BS_worker/news/interfax/news_interfax.json", "w",
               encoding="utf-8") as write_file:
         json.dump(news_list, write_file)
 
@@ -36,7 +36,7 @@ def show_interfax_news():
         "📑") + " Самые актуальные новости с сайта \"interfax.ru\": \n \n"
     buff_counter = 1
 
-    with open("BS_worker/news/interfax/news_interfax.json", "r",
+    with open("covid_19_worker/BS_worker/news/interfax/news_interfax.json", "r",
               encoding="utf-8") as read_file:
         news = json.load(read_file)
         for new in news:

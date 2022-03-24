@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import emoji
 
-# Данный скрипт используется для получения статистики COVID-19 по всему миру.
+# Данный скрипт используется для получения статистики covid_19_worker по всему миру.
 
 # Регистрация ссылки от куда берется статистика:
 URL = 'https://news.google.com/covid19/map?hl=ru&gl=RU&ceid=RU%3Aru'

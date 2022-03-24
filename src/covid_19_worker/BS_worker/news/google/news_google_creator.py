@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import emoji
 
-# Данный скрипт используется для получения новостей COVID-19 по России (google.com).
+# Данный скрипт используется для получения новостей covid_19_worker по России (google.com).
 
 
 # Регистрация ссылки от куда BS получает новости:

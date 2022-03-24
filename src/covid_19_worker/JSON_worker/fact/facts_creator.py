@@ -3,7 +3,7 @@ import random
 import emoji
 
 
-# Данный скрипт используется для получения фактов о COVID-19.
+# Данный скрипт используется для получения фактов о covid_19_worker.
 
 
 def facts_print():
@@ -11,7 +11,8 @@ def facts_print():
     all_Facts = emoji.emojize("🤔") + " Интересный факт *№ " + str(
         index) + "*:" + "\n" + " " + "\n"
 
-    with open("JSON_worker/fact/facts.json", "r", encoding='utf-8') as file:
+    with open("covid_19_worker/JSON_worker/fact/facts.json", "r",
+              encoding='utf-8') as file:
         facts = json.load(file)
     for fact in facts:
         if fact['id'] == index:
@@ -19,5 +20,6 @@ def facts_print():
 
     all_Facts += " " + "\n"
     all_Facts += emoji.emojize(
-        ":keyboard:") + " Введите \"/fact\", чтобы получить еще один интересный факт о COVID-19."
+        ":keyboard:") + " Введите \"/fact\", чтобы получить еще один " \
+                        "интересный факт о COVID-19."
     return all_Facts
