@@ -3,7 +3,7 @@
 # import schedule
 # from BS_worker.statistic.world import world_statistic_creator
 # from BS_worker.statistic.russia import russia_statistic_creator
-# from BS_worker.news.google import news_google_creator
+# from BS_worker.news.rbk import news_google_creator
 import emoji
 from src.covid_19_worker.JSON_worker.question import questions_creator
 from src.covid_19_worker.JSON_worker.fact import facts_creator
@@ -34,7 +34,7 @@ def show_statistic(message, telebot, bot):
 
 # Метод отправки новостей:
 def show_news(message, telebot, bot):
-    buff_google = "1️⃣ google.com"
+    buff_google = "1️⃣ rbk.com"
     buff_interfax = "2️⃣ interfax.ru"
     buff_yandex = "3️⃣ yandex.ru"
     buff_message = emoji.emojize(
@@ -42,7 +42,7 @@ def show_news(message, telebot, bot):
 
     keyboard_statistic = telebot.types.InlineKeyboardMarkup()
     button_google = telebot.types.InlineKeyboardButton(text=buff_google,
-                                                       callback_data="google",
+                                                       callback_data="rbk",
                                                        parse_mode="Markdown")
     keyboard_statistic.add(button_google)
     button_interfax = telebot.types.InlineKeyboardButton(text=buff_interfax,

@@ -1,16 +1,16 @@
 import telebot
 import emoji
 from telebot import types
-from covid_19_worker.JSON_worker.question import questions_creator
-from covid_19_worker.BS_worker.news.interfax import news_interfax_creator
-from covid_19_worker.BS_worker.news.yandex import news_yandex_creator
-from covid_19_worker import covid_creator
-from static_worker import text_creator
-from university_worker import univercity_creator
+from src.covid_19_worker.JSON_worker.question import questions_creator
+from src.covid_19_worker.BS_worker.news.interfax import news_interfax_creator
+from src.covid_19_worker.BS_worker.news.yandex import news_yandex_creator
+from src.covid_19_worker import covid_creator
+from src.static_worker import text_creator
+from src.university_worker import univercity_creator
 
-# from BS_worker.statistic.world import world_statistic_creator
+from src.covid_19_worker.BS_worker.statistic.world import world_statistic_creator
 # from BS_worker.statistic.russia import russia_statistic_creator
-# from BS_worker.news.google import news_google_creator
+from src.covid_19_worker.BS_worker.news.rbk import news_google_creator
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -122,21 +122,17 @@ def callback_data(call):
         # bot.send_message(chat_id=call.message.chat.id, text=message_region,
         #                  parse_mode="Markdown")
     elif call.data == "world":
+        message_world, message_countries = world_statistic_creator.show_stat_world()
+        bot.send_message(chat_id=call.message.chat.id, text=message_world,
+                         parse_mode="Markdown")
         bot.send_message(chat_id=call.message.chat.id,
-                         text="Technical works.", parse_mode="Markdown")
-        # message_world, message_countries = world_statistic_creator.show_stat_world()
-        # bot.send_message(chat_id=call.message.chat.id, text=message_world,
-        #                  parse_mode="Markdown")
-        # bot.send_message(chat_id=call.message.chat.id,
-        #                  text=message_countries, parse_mode="Markdown")
+                         text=message_countries, parse_mode="Markdown")
 
-    elif call.data == "google":
+    elif call.data == "rbk":
+        message_news_google = news_google_creator.get_google_news()
         bot.send_message(chat_id=call.message.chat.id,
-                         text="Technical works.", parse_mode="Markdown")
-        # message_news_google = news_google_creator.get_google_news()
-        # bot.send_message(chat_id=call.message.chat.id,
-        #                  text=message_news_google, parse_mode="Markdown",
-        #                  disable_web_page_preview=True)
+                         text=message_news_google, parse_mode="Markdown",
+                         disable_web_page_preview=True)
     elif call.data == "interfax":
         message_news_interfax = news_interfax_creator.get_interfax_news()
         bot.send_message(chat_id=call.message.chat.id,

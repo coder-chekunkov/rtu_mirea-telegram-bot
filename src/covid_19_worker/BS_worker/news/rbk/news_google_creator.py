@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 import json
 import emoji
 
-# Данный скрипт используется для получения новостей covid_19_worker по России (google.com).
+# Данный скрипт используется для получения новостей covid_19_worker по России (rbk.com).
 
 
 # Регистрация ссылки от куда BS получает новости:
-URL = 'https://news.google.com/topics/CAAqRggKIkBDQklTS2pvUVkyOTJhV1JmZEdWNGRGOXhkV1Z5ZVlJQkZRb0lMMjB2TURKcU56RVNDUzl0THpBeFkzQjVlU2dBUAE/sections/CAQqSggAKkYICiJAQ0JJU0tqb1FZMjkyYVdSZmRHVjRkRjl4ZFdWeWVZSUJGUW9JTDIwdk1ESnFOekVTQ1M5dEx6QXhZM0I1ZVNnQVAB?hl=ru&gl=RU&ceid=RU%3Aru'
+
+URL = 'https://www.rbc.ru/story/5e2881539a794724ab627caa'
 response = requests.get(URL)
 soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -15,15 +16,15 @@ soup = BeautifulSoup(response.content, 'html.parser')
 # Получение заголовков и ссылок на новости:
 def get_google_news():
     news_list = []
-    headings = soup.find_all('a', {'class': 'DY5T1d RZIKme'}, limit=10)
+    headings = soup.find_all('a', {'class': 'item__link'}, limit=10)
+
 
     for header in headings:
-        news = {'header': header.text.replace(u'\xa0', ' '),
-                'href': ('https://news.google.com' + header.attrs.get(
-                    "href").replace('.', '', 1))}
+        news = {'header': header.text.strip(),
+                'href': (header.attrs.get("href"))}
         news_list.append(news)
 
-    with open("BS_worker/news/google/news_google.json", "w",
+    with open("covid_19_worker/BS_worker/news/rbk/news_google.json", "w",
               encoding="utf-8") as write_file:
         json.dump(news_list, write_file)
 
@@ -34,10 +35,10 @@ def get_google_news():
 # Создание сообщения со всеми новостями:
 def show_google_news():
     message = emoji.emojize(
-        "📑") + " Самые актуальные новости с сайта \"google.com\": \n \n"
+        "📑") + " Самые актуальные новости с сайта \"rbk.com\": \n \n"
     buff_counter = 1
 
-    with open("BS_worker/news/google/news_google.json", "r",
+    with open("covid_19_worker/BS_worker/news/rbk/news_google.json", "r",
               encoding="utf-8") as read_file:
         news = json.load(read_file)
         for new in news:
