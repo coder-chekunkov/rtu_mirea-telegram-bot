@@ -10,6 +10,8 @@ from src.covid_19_worker.JSON_worker.fact import facts_creator
 from src.covid_19_worker.JSON_worker.text import text_creator
 
 
+# Данный скрипт собирает всю самую нужную информацию о COVID-19:
+
 # Метод отправки статистики по миру и России:
 def show_statistic(message, telebot, bot):
     buff_russia = "Россия " + emoji.emojize("🇷🇺")

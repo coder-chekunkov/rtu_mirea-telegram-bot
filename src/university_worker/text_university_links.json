@@ -1,0 +1,34 @@
+[
+  {
+    "tag": "zero",
+    "link": "university_worker/documents/TEXT_TITLE.md"
+  },
+  {
+    "tag": "one",
+    "link": "university_worker/documents/IT.md"
+  },
+  {
+    "tag": "two",
+    "link": "university_worker/documents/II.md"
+  },
+  {
+    "tag": "three",
+    "link": "university_worker/documents/CADT.md"
+  },
+  {
+    "tag": "four",
+    "link": "university_worker/documents/ATIP.md"
+  },
+  {
+    "tag": "five",
+    "link": "university_worker/documents/REI.md"
+  },
+  {
+    "tag": "six",
+    "link": "university_worker/documents/MT.md"
+  },
+  {
+    "tag": "seven",
+    "link": "university_worker/documents/FCTL.md"
+  }
+]
