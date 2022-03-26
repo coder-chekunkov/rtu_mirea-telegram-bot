@@ -53,7 +53,6 @@ def get_statistic_world():
                          'healed_a_day': values[healed_a_day].text.replace(u'\xa0', ' ')
                             }
                      }
-        print(statistic)
 
         world_statistic.append(statistic)
 
@@ -150,17 +149,3 @@ def get_emoji_country(name_region):
     else:
         return "🌐"
 
-
-# def show_stat_world_every_day():
-#     message = emoji.emojize("🌎") + " Статистика заболеваемости по *Миру*: \n"
-#
-#     with open("BS_worker/statistic/world/world_stat.json", "r",
-#               encoding="utf-8") as file:
-#         statistic = json.load(file)
-#         for stat in statistic:
-#             if stat["country"] == "Весь мир":
-#                 all_sick = stat["info"]["all_sick"]
-#                 sick_per_day = stat["info"]["sick_per_day"]
-#                 message += "*Все случаи заболевания:* " + all_sick + "\n"
-#                 message += "*Случае заболевания за день:* " + sick_per_day + "\n"
-#     return message

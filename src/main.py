@@ -1,5 +1,8 @@
+import threading
+
 import telebot
 import emoji
+
 from telebot import types
 from src.covid_19_worker.JSON_worker.question import questions_creator
 from src.covid_19_worker.BS_worker.news.interfax import news_interfax_creator
@@ -8,8 +11,9 @@ from src.covid_19_worker import covid_creator
 from src.static_worker import text_creator
 from src.university_worker import univercity_creator
 
+
 from src.covid_19_worker.BS_worker.statistic.world import world_statistic_creator
-# from BS_worker.statistic.russia import russia_statistic_creator
+from src.covid_19_worker.BS_worker.statistic.russia import russia_statistic_creator
 from src.covid_19_worker.BS_worker.news.rbk import news_google_creator
 
 # Активирование токена и запуск бота:
@@ -114,13 +118,11 @@ def show_schedule(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_data(call):
     if call.data == "russia":
-        bot.send_message(chat_id=call.message.chat.id,
-                         text="Technical works.", parse_mode="Markdown")
-        # message_russia, message_region = russia_statistic_creator.show_stat_russia()
-        # bot.send_message(chat_id=call.message.chat.id, text=message_russia,
-        #                  parse_mode="Markdown")
-        # bot.send_message(chat_id=call.message.chat.id, text=message_region,
-        #                  parse_mode="Markdown")
+        message_russia, message_region = russia_statistic_creator.show_stat_russia()
+        bot.send_message(chat_id=call.message.chat.id, text=message_russia,
+                         parse_mode="Markdown")
+        bot.send_message(chat_id=call.message.chat.id, text=message_region,
+                         parse_mode="Markdown")
     elif call.data == "world":
         message_world, message_countries = world_statistic_creator.show_stat_world()
         bot.send_message(chat_id=call.message.chat.id, text=message_world,
@@ -216,6 +218,4 @@ def callback_data(call):
 
 
 # Непрерывное прослушивание пользователя:
-# my_thread = threading.Thread(target=check_time)
-# my_thread.start()
 bot.polling(none_stop=True, interval=0)

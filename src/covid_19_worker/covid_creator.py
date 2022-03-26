@@ -1,9 +1,7 @@
-# import threading
-# import time
-# import schedule
-# from BS_worker.statistic.world import world_statistic_creator
-# from BS_worker.statistic.russia import russia_statistic_creator
-# from BS_worker.news.rbk import news_google_creator
+import time
+import schedule
+from src.covid_19_worker.BS_worker.statistic.world import world_statistic_creator
+from src.covid_19_worker.BS_worker.statistic.russia import russia_statistic_creator
 import emoji
 from src.covid_19_worker.JSON_worker.question import questions_creator
 from src.covid_19_worker.JSON_worker.fact import facts_creator
@@ -128,23 +126,5 @@ def show_bot_tasks(message, bot):
     TEXT_TASKS = text_creator.get_text("tasks")
     bot.send_message(message.from_user.id, TEXT_TASKS, parse_mode="Markdown")
 
-# Проверка времени:
-# def check_time():
-#     schedule.every().day.at("12:30").do(show_every_day_message)
-#     while True:
-#         schedule.run_pending()
-#         time.sleep(1)
 
 
-# Метод вывода ежедневного сообщения с обновленной статисткой заболеваемости:
-# def show_every_day_message():
-#     russia_statistic_creator.get_statistic_russia()
-#     world_statistic_creator.get_statistic_world()
-#
-#     TEXT_MESSAGE = "📊 Обновленная статистка заболеваемости *covid_19_worker*: \n \n"
-#     TEXT_MESSAGE += russia_statistic_creator.show_stat_russia_every_day() + "\n \n"
-#     TEXT_MESSAGE += world_statistic_creator.show_stat_world_every_day() + "\n \n"
-#     TEXT_MESSAGE += "⌨ Введите \"/stat\" для отображения более подробной информации о статистке заболеваемости."
-#
-#     for user in all_users:
-#         bot.send_message(user, TEXT_MESSAGE, parse_mode="Markdown")
