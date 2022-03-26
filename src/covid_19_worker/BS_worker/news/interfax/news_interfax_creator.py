@@ -22,8 +22,8 @@ def get_interfax_news():
                 "href": 'https://interfax.ru' + header.attrs.get("href")}
         news_list.append(news)
 
-    with open("covid_19_worker/BS_worker/news/interfax/news_interfax.json", "w",
-              encoding="utf-8") as write_file:
+    with open("covid_19_worker/BS_worker/news/interfax/news_interfax.json",
+              "w", encoding="utf-8") as write_file:
         json.dump(news_list, write_file)
 
     message = show_interfax_news()
@@ -36,8 +36,8 @@ def show_interfax_news():
         "📑") + " Самые актуальные новости с сайта \"interfax.ru\": \n \n"
     buff_counter = 1
 
-    with open("covid_19_worker/BS_worker/news/interfax/news_interfax.json", "r",
-              encoding="utf-8") as read_file:
+    with open("covid_19_worker/BS_worker/news/interfax/news_interfax.json",
+              "r", encoding="utf-8") as read_file:
         news = json.load(read_file)
         for new in news:
             if new['header'] is not None:

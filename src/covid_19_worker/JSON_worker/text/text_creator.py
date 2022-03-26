@@ -6,8 +6,8 @@ import json
 def get_text(tag):
     link = ""
 
-    with open('covid_19_worker/JSON_worker/text/texts.json', 'r', encoding='utf-8') as \
-            file:
+    with open('covid_19_worker/JSON_worker/text/texts.json', 'r',
+              encoding='utf-8') as file:
         texts = json.load(file)
     for text in texts:
         if text['tag'] == tag:

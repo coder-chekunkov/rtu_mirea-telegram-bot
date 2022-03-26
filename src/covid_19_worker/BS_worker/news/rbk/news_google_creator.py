@@ -18,7 +18,6 @@ def get_google_news():
     news_list = []
     headings = soup.find_all('a', {'class': 'item__link'}, limit=10)
 
-
     for header in headings:
         news = {'header': header.text.strip(),
                 'href': (header.attrs.get("href"))}

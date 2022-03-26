@@ -1,7 +1,3 @@
-import time
-import schedule
-from src.covid_19_worker.BS_worker.statistic.world import world_statistic_creator
-from src.covid_19_worker.BS_worker.statistic.russia import russia_statistic_creator
 import emoji
 from src.covid_19_worker.JSON_worker.question import questions_creator
 from src.covid_19_worker.JSON_worker.fact import facts_creator
@@ -14,10 +10,15 @@ from src.covid_19_worker.JSON_worker.text import text_creator
 def show_statistic(message, telebot, bot):
     buff_russia = "Россия " + emoji.emojize("🇷🇺")
     buff_world = "Мир " + emoji.emojize("🌎")
+    buff_mirea = "РТУ МИРЭА " + emoji.emojize("🏢")
     buff_message = emoji.emojize(
         "📊") + " Выберите статистику нужного региона:"
 
     keyboard_statistic = telebot.types.InlineKeyboardMarkup()
+    button_mirea = telebot.types.InlineKeyboardButton(text=buff_mirea,
+                                                      callback_data="mirea_stat",
+                                                      parse_mode="Markdown")
+    keyboard_statistic.add(button_mirea)
     button_russia = telebot.types.InlineKeyboardButton(text=buff_russia,
                                                        callback_data="russia",
                                                        parse_mode="Markdown")
@@ -32,17 +33,17 @@ def show_statistic(message, telebot, bot):
 
 # Метод отправки новостей:
 def show_news(message, telebot, bot):
-    buff_google = "1️⃣ rbk.com"
+    buff_google = "1️⃣ rbk.ru"
     buff_interfax = "2️⃣ interfax.ru"
     buff_yandex = "3️⃣ yandex.ru"
     buff_message = emoji.emojize(
         "📑") + " Выберите сайт, новости которого хотите посмотреть:"
 
     keyboard_statistic = telebot.types.InlineKeyboardMarkup()
-    button_google = telebot.types.InlineKeyboardButton(text=buff_google,
-                                                       callback_data="rbk",
-                                                       parse_mode="Markdown")
-    keyboard_statistic.add(button_google)
+    button_rbk = telebot.types.InlineKeyboardButton(text=buff_google,
+                                                    callback_data="rbk",
+                                                    parse_mode="Markdown")
+    keyboard_statistic.add(button_rbk)
     button_interfax = telebot.types.InlineKeyboardButton(text=buff_interfax,
                                                          callback_data="interfax",
                                                          parse_mode="Markdown")
@@ -122,9 +123,7 @@ def show_fact(message, bot):
     bot.send_message(message.from_user.id, TEXT_FACT, parse_mode="Markdown")
 
 
+# Метод вывода доступных задач по COVID-19:
 def show_bot_tasks(message, bot):
     TEXT_TASKS = text_creator.get_text("tasks")
     bot.send_message(message.from_user.id, TEXT_TASKS, parse_mode="Markdown")
-
-
-

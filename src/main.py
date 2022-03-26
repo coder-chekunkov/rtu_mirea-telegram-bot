@@ -1,8 +1,5 @@
-import threading
-
 import telebot
 import emoji
-
 from telebot import types
 from src.covid_19_worker.JSON_worker.question import questions_creator
 from src.covid_19_worker.BS_worker.news.interfax import news_interfax_creator
@@ -10,10 +7,11 @@ from src.covid_19_worker.BS_worker.news.yandex import news_yandex_creator
 from src.covid_19_worker import covid_creator
 from src.static_worker import text_creator
 from src.university_worker import univercity_creator
-
-
-from src.covid_19_worker.BS_worker.statistic.world import world_statistic_creator
-from src.covid_19_worker.BS_worker.statistic.russia import russia_statistic_creator
+from src.covid_19_worker.BS_worker.statistic.world import \
+    world_statistic_creator
+from src.covid_19_worker.BS_worker.statistic.russia import \
+    russia_statistic_creator
+from src.covid_19_worker.BS_worker.statistic.rtu_mirea import rtu_mirea_creator
 from src.covid_19_worker.BS_worker.news.rbk import news_google_creator
 
 # Активирование токена и запуск бота:
@@ -21,7 +19,7 @@ token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
 bot = telebot.TeleBot(token)
 
 # Текст для вывода задач:
-TEXT_BUTTON_TASKS = "Посмотреть доступные функции " + emoji.emojize(
+TEXT_BUTTON_TASKS = "Главное Меню " + emoji.emojize(
     ":card_index_dividers:")
 
 all_users = set()
@@ -45,6 +43,9 @@ def menu(message):
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
     if message.text == TEXT_BUTTON_TASKS:
+        # Посмотреть все разделы бота:
+        show_tasks(message)
+    elif message.text == "/menu":
         # Посмотреть все разделы бота:
         show_tasks(message)
     elif message.text == "/develop":
@@ -124,12 +125,15 @@ def callback_data(call):
         bot.send_message(chat_id=call.message.chat.id, text=message_region,
                          parse_mode="Markdown")
     elif call.data == "world":
-        message_world, message_countries = world_statistic_creator.show_stat_world()
-        bot.send_message(chat_id=call.message.chat.id, text=message_world,
-                         parse_mode="Markdown")
+        message_countries = world_statistic_creator.show_stat_world()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_countries, parse_mode="Markdown")
-
+    elif call.data == "mirea_stat":
+        message_title, message_stat = rtu_mirea_creator.get_statistic_mirea()
+        bot.send_message(chat_id=call.message.chat.id,
+                         text=message_title, parse_mode="Markdown")
+        bot.send_message(chat_id=call.message.chat.id,
+                         text=message_stat, parse_mode="Markdown")
     elif call.data == "rbk":
         message_news_google = news_google_creator.get_google_news()
         bot.send_message(chat_id=call.message.chat.id,

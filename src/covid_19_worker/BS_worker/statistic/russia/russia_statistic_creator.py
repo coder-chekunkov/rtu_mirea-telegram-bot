@@ -27,12 +27,18 @@ def get_statistic_russia():
     for tag in tags:
         statistic = {'country': tag.text.replace(u'\xa0', ' '),
                      "info": {
-                         'all_sick': sick_and_death[sick].text[:sick_and_death[sick].text.find('+')],
-                         'sick_a_day': sick_and_death[sick].text[sick_and_death[sick].text.find('+'):],
-                         'all_deaths': sick_and_death[death].text[:sick_and_death[death].text.find('+')],
-                         'death_a_day': sick_and_death[death].text[sick_and_death[death].text.find('+'):],
-                         'all_healed': healed_ls[healed].text[:healed_ls[healed].text.find('+')],
-                         'healed_a_day': healed_ls[healed].text[healed_ls[healed].text.find('+'):]
+                         'all_sick': sick_and_death[sick].text[
+                                     :sick_and_death[sick].text.find('+')],
+                         'sick_a_day': sick_and_death[sick].text[
+                                       sick_and_death[sick].text.find('+'):],
+                         'all_deaths': sick_and_death[death].text[
+                                       :sick_and_death[death].text.find('+')],
+                         'death_a_day': sick_and_death[death].text[
+                                        sick_and_death[death].text.find('+'):],
+                         'all_healed': healed_ls[healed].text[
+                                       :healed_ls[healed].text.find('+')],
+                         'healed_a_day': healed_ls[healed].text[
+                                         healed_ls[healed].text.find('+'):]
                      }
                      }
         russia_statistic.append(statistic)
@@ -40,7 +46,8 @@ def get_statistic_russia():
         death += 3
         healed += 1
 
-    with open("covid_19_worker/BS_worker/statistic/russia/russia_stat.json", 'w',
+    with open("covid_19_worker/BS_worker/statistic/russia/russia_stat.json",
+              'w',
               encoding='utf-8') as write_file:
         json.dump(russia_statistic, write_file)
 
@@ -53,11 +60,13 @@ def show_stat_russia():
         "🧭") + " ТОП-10 *областей и регионов* по заболеваемости:" + "\n" + " " + "\n"
     buff_counter = 1
 
-    with open("covid_19_worker/BS_worker/statistic/russia/russia_stat.json", "r",
+    with open("covid_19_worker/BS_worker/statistic/russia/russia_stat.json",
+              "r",
               encoding='utf-8') as file:
         statistic_r = json.load(file)
         for stat in statistic_r:
-            if stat["country"] != "Россия" and stat["country"] != "Весь мир" and buff_counter <= 10:
+            if stat["country"] != "Россия" and stat["country"] != "Весь мир" \
+                    and buff_counter <= 10:
                 name_region = stat["country"]
                 all_sick = stat["info"]["all_sick"]
                 sick_per_day = stat["info"]["sick_a_day"]
@@ -65,7 +74,8 @@ def show_stat_russia():
                 death_a_day = stat["info"]["death_a_day"]
                 all_healed = stat["info"]["all_healed"]
                 healed_a_day = stat["info"]["healed_a_day"]
-                message_region += "*" + str(buff_counter) + ". " + name_region + ":* " + "\n"
+                message_region += "*" + str(
+                    buff_counter) + ". " + name_region + ":* " + "\n"
                 message_region += "Все случаи заболевания: " + all_sick + "; " + "\n"
                 message_region += "Случае заболевания за день: " + sick_per_day + "; " + "\n"
                 message_region += "Все случаи летального исхода: " + all_deaths + "; " + "\n"
@@ -75,7 +85,7 @@ def show_stat_russia():
                 buff_counter += 1
 
     with open("covid_19_worker/BS_worker/statistic/world/world_stat.json", "r",
-                encoding="utf-8") as file:
+              encoding="utf-8") as file:
         statistic_w = json.load(file)
         for stat in statistic_w:
             if stat["country"] == "Россия":
@@ -94,6 +104,4 @@ def show_stat_russia():
                 message += "Все случаи выздоровления: " + all_healed + "; " + "\n"
                 message += "Случаи выздоровления за день: " + healed_a_day + "; " + "\n"
 
-
     return message, message_region
-
