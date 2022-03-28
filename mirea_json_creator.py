@@ -14,8 +14,6 @@ def parse_one(plots, url):
 
 def get_mirea_news():
 
-    news_list = []
-    plots = []
     headings = soup.find_all('div', {'class': 'uk-card uk-card-default'})
     for header in headings:
         title = header.find('a', class_='uk-link-reset')
@@ -41,10 +39,13 @@ def get_mirea_news():
 
 
 
+plots = []
+news_list = []
+
+
 for p in range(1, 2):
     URL = f"https://www.mirea.ru/news/?PAGEN_1={p}"
     response = requests.get(URL)
-    sleep(2)
     soup = BeautifulSoup(response.content, 'html.parser')
     get_mirea_news()
 
