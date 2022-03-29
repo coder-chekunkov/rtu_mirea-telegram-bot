@@ -23,6 +23,7 @@ TEXT_BUTTON_TASKS = "Главное Меню " + emoji.emojize(
     ":card_index_dividers:")
 
 all_users = set()
+big_message = {}
 
 
 # Метод отправки "приветственного сообщения"
@@ -42,6 +43,7 @@ def menu(message):
 # Метод "прослушивания" чата:
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
+    big_message = message
     if message.text == TEXT_BUTTON_TASKS:
         # Посмотреть все разделы бота:
         show_tasks(message)
@@ -52,25 +54,7 @@ def get_text_messages(message):
         # Все о разработчиках:
         show_develop(message)
     elif message.text == "/covid":
-        covid_creator.show_bot_tasks(message, bot)
-    elif message.text == "/stat":
-        # Статистика covid_19_worker-19:
-        covid_creator.show_statistic(message, telebot, bot)
-    elif message.text == "/symptoms":
-        # Симптомы covid_19_worker-19:
-        covid_creator.show_symptoms(message, bot)
-    elif message.text == "/prevention":
-        # Профилактика covid_19_worker-19:
-        covid_creator.show_prevention(message, bot)
-    elif message.text == "/questions":
-        # Вопросы/ответы covid_19_worker-19:
-        covid_creator.show_questions(message, telebot, bot)
-    elif message.text == "/newscovid":
-        # Новости covid_19_worker-19:
-        covid_creator.show_news(message, telebot, bot)
-    elif message.text == "/fact":
-        # Факты covid_19_worker-19:
-        covid_creator.show_fact(message, bot)
+        covid_creator.show_bot_tasks(message, telebot, bot)
     elif message.text == "/news":
         # Новости с РТУ МИРЭА:
         show_news(message)
@@ -118,7 +102,25 @@ def show_schedule(message):
 # Обработчик нажатия на кнопку:
 @bot.callback_query_handler(func=lambda call: True)
 def callback_data(call):
-    if call.data == "russia":
+    if call.data == "statistic":
+        # Статистика covid_19_worker-19:
+        covid_creator.show_statistic(call, telebot, bot)
+    elif call.data == "newscovid":
+        # Новости covid_19_worker-19:
+        covid_creator.show_news(call, telebot, bot)
+    elif call.data == "symptoms":
+        # Симптомы covid_19_worker-19:
+        covid_creator.show_symptoms(call, bot)
+    elif call.data == "prevention":
+        # Профилактика covid_19_worker-19:
+        covid_creator.show_prevention(call, bot)
+    elif call.data == "questions":
+        # Вопросы/ответы covid_19_worker-19:
+        covid_creator.show_questions(call, telebot, bot)
+    elif call.data == "facts":
+        # Факты covid_19_worker-19:
+        covid_creator.show_fact(call, bot)
+    elif call.data == "russia":
         message_russia, message_region = russia_statistic_creator.show_stat_russia()
         bot.send_message(chat_id=call.message.chat.id, text=message_russia,
                          parse_mode="Markdown")

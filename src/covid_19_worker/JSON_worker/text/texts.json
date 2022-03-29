@@ -10,5 +10,9 @@
   {
     "tag": "symptoms",
     "link": "covid_19_worker/JSON_worker/text/documents/TEXT_SYMPTOMS.md"
+  },
+  {
+    "tag": "menu",
+    "link": "covid_19_worker/JSON_worker/text/documents/TEXT_RETURN_MENU.md"
   }
 ]

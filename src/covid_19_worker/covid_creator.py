@@ -124,6 +124,55 @@ def show_fact(message, bot):
 
 
 # Метод вывода доступных задач по COVID-19:
-def show_bot_tasks(message, bot):
-    TEXT_TASKS = text_creator.get_text("tasks")
-    bot.send_message(message.from_user.id, TEXT_TASKS, parse_mode="Markdown")
+def show_bot_tasks(message, telebot, bot):
+    keyboard_covid = telebot.types.InlineKeyboardMarkup()
+
+    statistic_buff_message = "Посмотреть статистику 📊"
+    button_statistic = telebot.types.InlineKeyboardButton(
+        text=statistic_buff_message,
+        callback_data="statistic",
+        parse_mode="Markdown")
+    keyboard_covid.add(button_statistic)
+
+    news_buff_message = "Новости 📑"
+    button_news = telebot.types.InlineKeyboardButton(
+        text=news_buff_message,
+        callback_data="newscovid",
+        parse_mode="Markdown")
+    keyboard_covid.add(button_news)
+
+    symptoms_buff_message = "Симптомы 🤕"
+    button_symptoms = telebot.types.InlineKeyboardButton(
+        text=symptoms_buff_message,
+        callback_data="symptoms",
+        parse_mode="Markdown")
+    keyboard_covid.add(button_symptoms)
+
+    prevention_buff_message = "Профилактика 😷"
+    button_prevention = telebot.types.InlineKeyboardButton(
+        text=prevention_buff_message,
+        callback_data="prevention",
+        parse_mode="Markdown")
+    keyboard_covid.add(button_prevention)
+
+    questions_buff_message = "Часто задаваемые вопросы ⁉"
+    button_questions = telebot.types.InlineKeyboardButton(
+        text=questions_buff_message,
+        callback_data="questions",
+        parse_mode="Markdown")
+    keyboard_covid.add(button_questions)
+
+    fact_buff_message = "Интересный факт 🤔"
+    button_fact = telebot.types.InlineKeyboardButton(
+        text=fact_buff_message,
+        callback_data="facts",
+        parse_mode="Markdown")
+    keyboard_covid.add(button_fact)
+
+    bot.send_message(message.from_user.id,
+                     "🦠 Доступные задачи по *COVID-19*:",
+                     reply_markup=keyboard_covid, parse_mode="Markdown")
+
+    TEXT_MENU = text_creator.get_text("menu")
+    bot.send_message(message.from_user.id, TEXT_MENU,
+                     parse_mode="Markdown")
