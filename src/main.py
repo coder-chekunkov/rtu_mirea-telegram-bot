@@ -1,3 +1,6 @@
+import threading
+import time
+import schedule
 import telebot
 import emoji
 from telebot import types
@@ -13,6 +16,8 @@ from src.covid_19_worker.BS_worker.statistic.russia import \
     russia_statistic_creator
 from src.covid_19_worker.BS_worker.statistic.rtu_mirea import rtu_mirea_creator
 from src.covid_19_worker.BS_worker.news.rbk import news_google_creator
+from src.news_worker.news_mirea import news_creator
+from src.news_worker import news_shower
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -23,7 +28,6 @@ TEXT_BUTTON_TASKS = "Главное Меню " + emoji.emojize(
     ":card_index_dividers:")
 
 all_users = set()
-big_message = {}
 
 
 # Метод отправки "приветственного сообщения"
@@ -43,7 +47,6 @@ def menu(message):
 # Метод "прослушивания" чата:
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
-    big_message = message
     if message.text == TEXT_BUTTON_TASKS:
         # Посмотреть все разделы бота:
         show_tasks(message)
@@ -54,10 +57,11 @@ def get_text_messages(message):
         # Все о разработчиках:
         show_develop(message)
     elif message.text == "/covid":
+        # Все возможные задачи с "COVID-19":
         covid_creator.show_bot_tasks(message, telebot, bot)
     elif message.text == "/news":
         # Новости с РТУ МИРЭА:
-        show_news(message)
+        news_shower.show_dates_button(message, telebot, bot)
     elif message.text == "/university":
         # Информация о институтах и кафедр:
         univercity_creator.show_buttons_university(message, telebot, bot)
@@ -81,13 +85,6 @@ def show_tasks(message):
 def show_develop(message):
     TEXT_DEVELOP = text_creator.get_text("develop")
     bot.send_message(message.from_user.id, TEXT_DEVELOP, parse_mode="Markdown",
-                     disable_web_page_preview=True)
-
-
-# Метод отправки новостей:
-def show_news(message):
-    TEXT_NEWS = "В разработке!"
-    bot.send_message(message.from_user.id, TEXT_NEWS, parse_mode="Markdown",
                      disable_web_page_preview=True)
 
 
@@ -121,32 +118,50 @@ def callback_data(call):
         # Факты covid_19_worker-19:
         covid_creator.show_fact(call, bot)
     elif call.data == "russia":
+        # Вывод статистики заболеваемости по России:
         message_russia, message_region = russia_statistic_creator.show_stat_russia()
         bot.send_message(chat_id=call.message.chat.id, text=message_russia,
                          parse_mode="Markdown")
         bot.send_message(chat_id=call.message.chat.id, text=message_region,
                          parse_mode="Markdown")
     elif call.data == "world":
+        # Вывод статистики заболеваемости по Миру:
         message_countries = world_statistic_creator.show_stat_world()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_countries, parse_mode="Markdown")
     elif call.data == "mirea_stat":
+        # Вывод статистики заболеваемости по РТУ МИРЭА:
         message_title, message_stat = rtu_mirea_creator.get_statistic_mirea()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_title, parse_mode="Markdown")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_stat, parse_mode="Markdown")
+    elif call.data == "last_10_news":
+        # Парсинг и вывод последних 10 новостей:
+        news_creator.show_mirea_news(call, bot, 10)
+    elif call.data == "last_20_news":
+        # Парсинг и вывод последних 20 новостей:
+        news_creator.show_mirea_news(call, bot, 20)
+    elif call.data == "last_30_news":
+        # Парсинг и вывод последних 30 новостей:
+        news_creator.show_mirea_news(call, bot, 30)
+    elif call.data == "last_40_news":
+        # Парсинг и вывод последних 30 новостей:
+        news_creator.show_mirea_news(call, bot, 40)
     elif call.data == "rbk":
+        # Получение новостей с сайта "rbk":
         message_news_google = news_google_creator.get_google_news()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_news_google, parse_mode="Markdown",
                          disable_web_page_preview=True)
     elif call.data == "interfax":
+        # Получение новостей с сайта "interfax":
         message_news_interfax = news_interfax_creator.get_interfax_news()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_news_interfax, parse_mode="Markdown",
                          disable_web_page_preview=True)
     elif call.data == "yandex":
+        # Получение новостей с сайта "yandex":
         message_news_google = news_yandex_creator.get_yandex_news()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_news_google, parse_mode="Markdown",
@@ -223,5 +238,38 @@ def callback_data(call):
                          parse_mode="Markdown")
 
 
+# Проверка времени:
+def check_time():
+    schedule.every().day.at("12:30").do(show_every_day_message_stat)
+    schedule.every().day.at("12:00").do(show_every_day_message_news)
+    schedule.every().day.at("15:00").do(show_every_day_message_news)
+    schedule.every().day.at("19:41").do(show_every_day_message_news)
+    schedule.every().day.at("22:00").do(show_every_day_message_news)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+
+# Метод вывода ежедневного сообщения с обновленными новостями РТУ МИРЭА:
+def show_every_day_message_news():
+    news_creator.start_parse_pages(11)
+    TEXT_MESSAGE = "📊 Новости \"*РТУ МИРЭА*\" обновились."
+    for user in all_users:
+        bot.send_message(user, TEXT_MESSAGE, parse_mode="Markdown")
+
+
+# Метод вывода ежедневного сообщения с обновленной статисткой заболеваемости:
+def show_every_day_message_stat():
+    russia_statistic_creator.get_statistic_russia()
+    world_statistic_creator.get_statistic_world()
+    rtu_mirea_creator.get_statistic_mirea()
+
+    TEXT_MESSAGE = "📊 Статистка заболеваемости *COVID-19* обновилась."
+    for user in all_users:
+        bot.send_message(user, TEXT_MESSAGE, parse_mode="Markdown")
+
+
 # Непрерывное прослушивание пользователя:
+my_thread = threading.Thread(target=check_time)
+my_thread.start()
 bot.polling(none_stop=True, interval=0)

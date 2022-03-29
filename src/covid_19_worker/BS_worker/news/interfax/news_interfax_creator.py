@@ -44,6 +44,7 @@ def show_interfax_news():
                 header = new['header']
                 href = new['href']
                 message += '*' + str(
-                    buff_counter) + ".* [" + header + "]" + "(" + href + ").\n \n"
+                    buff_counter) + ".* [" + header + "]" + "(" + href + \
+                           ").\n [------] \n"
                 buff_counter += 1
     return message
