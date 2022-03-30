@@ -16,8 +16,10 @@ from src.covid_19_worker.BS_worker.statistic.russia import \
     russia_statistic_creator
 from src.covid_19_worker.BS_worker.statistic.rtu_mirea import rtu_mirea_creator
 from src.covid_19_worker.BS_worker.news.rbk import news_google_creator
-from src.news_worker.news_mirea import news_creator, word_searcher
+from src.news_worker.news_mirea import news_creator
+from src.news_worker.word_checker import word_searcher
 from src.news_worker import news_shower
+from src.news_worker.word_checker import university_searcher
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -29,6 +31,7 @@ TEXT_BUTTON_TASKS = "Главное Меню " + emoji.emojize(
 
 all_users = set()
 global word_search
+global news_index
 
 
 # Метод отправки "приветственного сообщения"
@@ -118,9 +121,37 @@ def show_message_counter(message):
                      reply_markup=keyboard_word_checker, parse_mode="Markdown")
 
 
+def show_keyboard_news_university(call, university):
+    global news_index
+    news_index = []
+    news_index = university_searcher.university_search(university)
+    counter = len(news_index)
+    message_counter = "🔃 Количество упоминаний в новостях: " + str(
+        counter)
+    bot.send_message(chat_id=call.message.chat.id,
+                     text=message_counter, parse_mode="Markdown")
+
+    keyboard_show_news = telebot.types.InlineKeyboardMarkup()
+    TEXT_MESSAGE_WORD = "🔍 Показать данные новости?"
+    TEXT_BUTTON_YES = "Да ✅"
+    TEXT_BUTTON_NO = "Нет ❌"
+
+    button_yes = telebot.types.InlineKeyboardButton(text=TEXT_BUTTON_YES,
+                                                    callback_data="show_news_university_yes",
+                                                    parse_mode="Markdown")
+    button_no = telebot.types.InlineKeyboardButton(text=TEXT_BUTTON_NO,
+                                                   callback_data="show_news_university_no",
+                                                   parse_mode="Markdown")
+    keyboard_show_news.add(button_yes, button_no)
+    bot.send_message(chat_id=call.message.chat.id, text=TEXT_MESSAGE_WORD,
+                     reply_markup=keyboard_show_news,
+                     parse_mode="Markdown")
+
+
 # Обработчик нажатия на кнопку:
 @bot.callback_query_handler(func=lambda call: True)
 def callback_data(call):
+    global news_index
     if call.data == "statistic":
         # Статистика covid_19_worker-19:
         covid_creator.show_statistic(call, telebot, bot)
@@ -230,75 +261,60 @@ def callback_data(call):
                          text=TEXT_ERROR_MESSAGE, parse_mode="Markdown")
 
     elif call.data == "university_0":
-        message_about_university = univercity_creator.get_information("one")
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_about_university, parse_mode="Markdown")
-        counter = 0
-        message_counter = "🔃 Количество упоминаний в новостях: " + str(
-            counter)
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_counter, parse_mode="Markdown")
-
-    elif call.data == "university_1":
-        message_about_university = univercity_creator.get_information("two")
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_about_university, parse_mode="Markdown")
-        counter = 0
-        message_counter = "🔃 Количество упоминаний в новостях: " + str(
-            counter)
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_counter, parse_mode="Markdown")
-
-    elif call.data == "university_2":
+        # Институт Информационных Технологий:
         message_about_university = univercity_creator.get_information("three")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
-        counter = 0
-        message_counter = "🔃 Количество упоминаний в новостях: " + str(
-            counter)
+        show_keyboard_news_university(call, "IT")
+
+    elif call.data == "university_1":
+        # Институт искусственного интеллекта:
+        message_about_university = univercity_creator.get_information("three")
         bot.send_message(chat_id=call.message.chat.id,
-                         text=message_counter, parse_mode="Markdown")
+                         text=message_about_university, parse_mode="Markdown")
+        show_keyboard_news_university(call, "II")
+
+    elif call.data == "university_2":
+        # Институт кибербезопасности и цифровых технологий:
+        message_about_university = univercity_creator.get_information("three")
+        bot.send_message(chat_id=call.message.chat.id,
+                         text=message_about_university, parse_mode="Markdown")
+        show_keyboard_news_university(call, "CADT")
 
     elif call.data == "university_3":
+        # Институт перспективных технологий и индустриального программирования:
         message_about_university = univercity_creator.get_information("four")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
-        counter = 0
-        message_counter = "🔃 Количество упоминаний в новостях: " + str(
-            counter)
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_counter, parse_mode="Markdown")
+        show_keyboard_news_university(call, "ATIP")
 
     elif call.data == "university_4":
+        # Институт радиоэлектроники и информатики:
         message_about_university = univercity_creator.get_information("five")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
-        counter = 0
-        message_counter = "🔃 Количество упоминаний в новостях: " + str(
-            counter)
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_counter, parse_mode="Markdown")
+        show_keyboard_news_university(call, "REI")
 
     elif call.data == "university_5":
+        # Институт технологий управления:
         message_about_university = univercity_creator.get_information("six")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
-        counter = 0
-        message_counter = "🔃 Количество упоминаний в новостях: " + str(
-            counter)
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_counter, parse_mode="Markdown")
+        show_keyboard_news_university(call, "MT")
 
     elif call.data == "university_6":
+        # Институт тонких химических технологий им. М.В. Ломоносова:
         message_about_university = univercity_creator.get_information("seven")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
-        counter = 0
-        message_counter = "🔃 Количество упоминаний в новостях: " + str(
-            counter)
-        bot.send_message(chat_id=call.message.chat.id,
-                         text=message_counter, parse_mode="Markdown")
+        show_keyboard_news_university(call, "FCTL")
 
+    elif call.data == "show_news_university_yes":
+        # Вывод всех новостей с упоминанием института:
+        university_searcher.news_output(call, bot, news_index)
+    elif call.data == "show_news_university_no":
+        # Отказ смотреть новости с институтами:
+        show_tasks(call)
     else:
         number_of_question = call.data
         answer, question = questions_creator.answers_print(number_of_question)
