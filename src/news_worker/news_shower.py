@@ -28,6 +28,12 @@ def show_dates_button(message, telebot, bot):
         parse_mode="Markdown")
     keyboard_dates.add(button_last_40_news)
 
+    update_news = "Обновить новости 🔃"
+    button_update_news = telebot.types.InlineKeyboardButton(
+        text=update_news, callback_data="update_news",
+        parse_mode="Markdown")
+    keyboard_dates.add(button_update_news)
+
     bot.send_message(message.from_user.id,
                      "📆 Выберите количество новостей *РТУ МИРЭА*:",
                      reply_markup=keyboard_dates, parse_mode="Markdown")
