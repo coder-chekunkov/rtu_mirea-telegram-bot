@@ -2,6 +2,7 @@ import emoji
 from src.covid_19_worker.JSON_worker.question import questions_creator
 from src.covid_19_worker.JSON_worker.fact import facts_creator
 from src.covid_19_worker.JSON_worker.text import text_creator
+from src.log_worker import log_creator
 
 
 # Данный скрипт собирает всю самую нужную информацию о COVID-19:
@@ -125,6 +126,9 @@ def show_fact(message, bot):
 
 # Метод вывода доступных задач по COVID-19:
 def show_bot_tasks(message, telebot, bot):
+    # Создание лога:
+    log_creator.make_log(message, "переход в \"COVID-19\"")
+
     keyboard_covid = telebot.types.InlineKeyboardMarkup()
 
     statistic_buff_message = "Посмотреть статистику 📊"

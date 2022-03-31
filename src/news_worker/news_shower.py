@@ -1,7 +1,13 @@
+from src.log_worker import log_creator
+
+
 # Данный скрипт используется для отправки возможного количества новостей:
 
 # Метод отправки клавиатуры:
 def show_dates_button(message, telebot, bot):
+    # Создание лога:
+    log_creator.make_log(message, "переход в \"Новости\"")
+
     keyboard_dates = telebot.types.InlineKeyboardMarkup()
 
     last_10_news = "Последние 10 новостей 📆"

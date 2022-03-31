@@ -20,6 +20,7 @@ from src.news_worker.news_mirea import news_creator
 from src.news_worker.word_checker import word_searcher
 from src.news_worker import news_shower
 from src.news_worker.word_checker import university_searcher
+from src.log_worker import log_creator
 
 # Активирование токена и запуск бота:
 token = '5219565252:AAETCFyyTmY3ioY6yQr56Eiz5iTSdJ5jl4s'
@@ -45,7 +46,9 @@ def menu(message):
     bot.send_message(message.from_user.id, START_MESSAGE,
                      reply_markup=keyboard, parse_mode="Markdown")
     all_users.add(message.from_user.id)
-    print(all_users)
+
+    # Создание лога:
+    log_creator.make_log(message, "присоединение/перезапуск")
 
 
 # Метод "прослушивания" чата:
@@ -82,12 +85,18 @@ def show_tasks(message):
     bot.send_message(message.from_user.id, TEXT_TASKS, parse_mode="Markdown",
                      disable_web_page_preview=True)
 
+    # Создание лога:
+    log_creator.make_log(message, "переход в \"Главное меню\"")
+
 
 # Метод отправки контактов разработчиков:
 def show_develop(message):
     TEXT_DEVELOP = text_creator.get_text("develop")
     bot.send_message(message.from_user.id, TEXT_DEVELOP, parse_mode="Markdown",
                      disable_web_page_preview=True)
+
+    # Создание лога:
+    log_creator.make_log(message, "переход в \"Разработчики\"")
 
 
 # Метод отправки расписания:
@@ -96,6 +105,9 @@ def show_schedule(message):
     bot.send_message(message.from_user.id, TEXT_SCHEDULE,
                      parse_mode="Markdown",
                      disable_web_page_preview=True)
+
+    # Создание лога:
+    log_creator.make_log(message, "переход в \"Расписание\"")
 
 
 # Метод отправки клавиатуры с уточнением задачи:
@@ -119,6 +131,10 @@ def show_message_counter(message):
     bot.send_message(message.from_user.id,
                      TEXT_MESSAGE_WORD,
                      reply_markup=keyboard_word_checker, parse_mode="Markdown")
+
+    # Создание лога:
+    text_message_log = "ввод слова \"" + word_search + "\""
+    log_creator.make_log(message, text_message_log)
 
 
 def show_keyboard_news_university(call, university):
@@ -156,25 +172,43 @@ def callback_data(call):
         # Статистика covid_19_worker-19:
         covid_creator.show_statistic(call, telebot, bot)
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос статистики \"COVID-19\"")
+
     elif call.data == "newscovid":
         # Новости covid_19_worker-19:
         covid_creator.show_news(call, telebot, bot)
+
+        # Создание лога:
+        log_creator.make_log(call, "запрос новостей по \"COVID-19\"")
 
     elif call.data == "symptoms":
         # Симптомы covid_19_worker-19:
         covid_creator.show_symptoms(call, bot)
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос симптомов по \"COVID-19\"")
+
     elif call.data == "prevention":
         # Профилактика covid_19_worker-19:
         covid_creator.show_prevention(call, bot)
+
+        # Создание лога:
+        log_creator.make_log(call, "запрос профилактики \"COVID-19\"")
 
     elif call.data == "questions":
         # Вопросы/ответы covid_19_worker-19:
         covid_creator.show_questions(call, telebot, bot)
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос вопросов/ответов по \"COVID-19\"")
+
     elif call.data == "facts":
         # Факты covid_19_worker-19:
         covid_creator.show_fact(call, bot)
+
+        # Создание лога:
+        log_creator.make_log(call, "запрос факта по \"COVID-19\"")
 
     elif call.data == "russia":
         # Вывод статистики заболеваемости по России:
@@ -184,11 +218,19 @@ def callback_data(call):
         bot.send_message(chat_id=call.message.chat.id, text=message_region,
                          parse_mode="Markdown")
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос статистики заболеваемости "
+                                   "\"COVID-19\" по России")
+
     elif call.data == "world":
         # Вывод статистики заболеваемости по Миру:
         message_countries = world_statistic_creator.show_stat_world()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_countries, parse_mode="Markdown")
+
+        # Создание лога:
+        log_creator.make_log(call, "запрос статистики заболеваемости "
+                                   "\"COVID-19\" по Миру")
 
     elif call.data == "mirea_stat":
         # Вывод статистики заболеваемости по РТУ МИРЭА:
@@ -198,21 +240,41 @@ def callback_data(call):
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_stat, parse_mode="Markdown")
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос статистики заболеваемости "
+                                   "\"COVID-19\" по РТУ МИРЭА")
+
     elif call.data == "last_10_news":
         # Парсинг и вывод последних 10 новостей:
         news_creator.show_mirea_news(call, bot, 10)
+
+        # Создание лога:
+        log_creator.make_log(call, "запрос последних 10 новостей по \"РТУ "
+                                   "МИРЭА\"")
 
     elif call.data == "last_20_news":
         # Парсинг и вывод последних 20 новостей:
         news_creator.show_mirea_news(call, bot, 20)
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос последних 20 новостей по \"РТУ "
+                                   "МИРЭА\"")
+
     elif call.data == "last_30_news":
         # Парсинг и вывод последних 30 новостей:
         news_creator.show_mirea_news(call, bot, 30)
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос последних 30 новостей по \"РТУ "
+                                   "МИРЭА\"")
+
     elif call.data == "last_40_news":
         # Парсинг и вывод последних 30 новостей:
         news_creator.show_mirea_news(call, bot, 40)
+
+        # Создание лога:
+        log_creator.make_log(call, "запрос последних 40 новостей по \"РТУ "
+                                   "МИРЭА\"")
 
     elif call.data == "update_news":
         # Принудительное обновление новостей:
@@ -229,12 +291,19 @@ def callback_data(call):
         bot.send_message(chat_id=call.message.chat.id,
                          text=TEXT_MESSAGE_UPDATED, parse_mode="Markdown")
 
+        # Создание лога:
+        log_creator.make_log(call, "принудительное обновление новостей \"РТУ "
+                                   "МИРЭА\"")
+
     elif call.data == "rbk":
         # Получение новостей с сайта "rbk":
         message_news_google = news_google_creator.get_google_news()
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_news_google, parse_mode="Markdown",
                          disable_web_page_preview=True)
+
+        # Создание лога:
+        log_creator.make_log(call, "запрос новостей по \"COVID-19\" с rbk")
 
     elif call.data == "interfax":
         # Получение новостей с сайта "interfax":
@@ -243,6 +312,10 @@ def callback_data(call):
                          text=message_news_interfax, parse_mode="Markdown",
                          disable_web_page_preview=True)
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос новостей по \"COVID-19\" с "
+                                   "interfax")
+
     elif call.data == "yandex":
         # Получение новостей с сайта "yandex":
         message_news_google = news_yandex_creator.get_yandex_news()
@@ -250,15 +323,25 @@ def callback_data(call):
                          text=message_news_google, parse_mode="Markdown",
                          disable_web_page_preview=True)
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос новостей по \"COVID-19\" с yandex")
+
     elif call.data == "word_checker_yes":
         # Вывод сообщения о подсчете слова:
         word_searcher.news_search(call, bot, word_search)
+
+        # Создание лога:
+        text_message_log = "запрос подсчета слова \"" + word_search + "\""
+        log_creator.make_log(call, text_message_log)
 
     elif call.data == "word_checker_no":
         # Сообщение об ошибке:
         TEXT_ERROR_MESSAGE = text_creator.get_text("error")
         bot.send_message(chat_id=call.message.chat.id,
                          text=TEXT_ERROR_MESSAGE, parse_mode="Markdown")
+
+        # Создание лога:
+        log_creator.make_log(call, "переход в \"Главное меню\"")
 
     elif call.data == "university_0":
         # Институт Информационных Технологий:
@@ -267,12 +350,18 @@ def callback_data(call):
                          text=message_about_university, parse_mode="Markdown")
         show_keyboard_news_university(call, "IT")
 
+        # Создание лога:
+        log_creator.make_log(call, "вывод информации о институте \"ИТ\"")
+
     elif call.data == "university_1":
         # Институт искусственного интеллекта:
         message_about_university = univercity_creator.get_information("three")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
         show_keyboard_news_university(call, "II")
+
+        # Создание лога:
+        log_creator.make_log(call, "вывод информации о институте \"ИИ\"")
 
     elif call.data == "university_2":
         # Институт кибербезопасности и цифровых технологий:
@@ -281,12 +370,18 @@ def callback_data(call):
                          text=message_about_university, parse_mode="Markdown")
         show_keyboard_news_university(call, "CADT")
 
+        # Создание лога:
+        log_creator.make_log(call, "вывод информации о институте \"КИЦТ\"")
+
     elif call.data == "university_3":
         # Институт перспективных технологий и индустриального программирования:
         message_about_university = univercity_creator.get_information("four")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
         show_keyboard_news_university(call, "ATIP")
+
+        # Создание лога:
+        log_creator.make_log(call, "вывод информации о институте \"ПТИП\"")
 
     elif call.data == "university_4":
         # Институт радиоэлектроники и информатики:
@@ -295,12 +390,18 @@ def callback_data(call):
                          text=message_about_university, parse_mode="Markdown")
         show_keyboard_news_university(call, "REI")
 
+        # Создание лога:
+        log_creator.make_log(call, "вывод информации о институте \"РЭИ\"")
+
     elif call.data == "university_5":
         # Институт технологий управления:
         message_about_university = univercity_creator.get_information("six")
         bot.send_message(chat_id=call.message.chat.id,
                          text=message_about_university, parse_mode="Markdown")
         show_keyboard_news_university(call, "MT")
+
+        # Создание лога:
+        log_creator.make_log(call, "вывод информации о институте \"ТУ\"")
 
     elif call.data == "university_6":
         # Институт тонких химических технологий им. М.В. Ломоносова:
@@ -309,12 +410,22 @@ def callback_data(call):
                          text=message_about_university, parse_mode="Markdown")
         show_keyboard_news_university(call, "FCTL")
 
+        # Создание лога:
+        log_creator.make_log(call, "вывод информации о институте \"ИМХТ\"")
+
     elif call.data == "show_news_university_yes":
         # Вывод всех новостей с упоминанием института:
         university_searcher.news_output(call, bot, news_index)
+
+        # Создание лога:
+        log_creator.make_log(call, "вывод новостей с институтами")
+
     elif call.data == "show_news_university_no":
         # Отказ смотреть новости с институтами:
         show_tasks(call)
+        # Создание лога:
+        log_creator.make_log(call, "отказ выводить новости с институтами")
+
     else:
         number_of_question = call.data
         answer, question = questions_creator.answers_print(number_of_question)
@@ -323,11 +434,14 @@ def callback_data(call):
         bot.send_message(chat_id=call.message.chat.id, text=message,
                          parse_mode="Markdown")
 
+        # Создание лога:
+        log_creator.make_log(call, "запрос ответа на вопрос по \"COVID-19\"")
+
 
 # Проверка времени:
 def check_time():
-    schedule.every().day.at("12:30").do(show_every_day_message_stat)
-    schedule.every().day.at("12:00").do(show_every_day_message_news)
+    schedule.every().day.at("11:37").do(show_every_day_message_stat)
+    schedule.every().day.at("11:38").do(show_every_day_message_news)
     schedule.every().day.at("15:00").do(show_every_day_message_news)
     schedule.every().day.at("19:00").do(show_every_day_message_news)
     schedule.every().day.at("22:00").do(show_every_day_message_news)
@@ -338,6 +452,10 @@ def check_time():
 
 # Метод вывода ежедневного сообщения с обновленными новостями РТУ МИРЭА:
 def show_every_day_message_news():
+    # Создание лога:
+    log_creator.make_log_bot("Автоматическое обновление новостей \"РТУ "
+                             "МИРЭА\"")
+
     news_creator.start_parse_pages(11)
     TEXT_MESSAGE = "🔃 Новости \"*РТУ МИРЭА*\" обновились."
     for user in all_users:
@@ -346,6 +464,10 @@ def show_every_day_message_news():
 
 # Метод вывода ежедневного сообщения с обновленной статисткой заболеваемости:
 def show_every_day_message_stat():
+    # Создание лога:
+    log_creator.make_log_bot("Автоматическое обновление статистики "
+                             "заболеваемости \"COVID-19\"")
+
     russia_statistic_creator.get_statistic_russia()
     world_statistic_creator.get_statistic_world()
     rtu_mirea_creator.get_statistic_mirea()
