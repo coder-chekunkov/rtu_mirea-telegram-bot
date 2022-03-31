@@ -36,20 +36,27 @@
   - ⁉️ Часто задаваемые вопросы
   - 🤔 Интересный факт
 - 🧾 Расписание - "***/schedule***"
-- 🧑‍💻 Связаться с разработчиками - "***/develop***"
+ - 🧑‍💻 Связаться с разработчиками - "***/develop***"
 
 *введите команды в кавычках, чтобы бот выполнил задачу.*
+
+🔃 Так же бот ежедневного **автоматически обновляет** новости РТУ МИРЭА и статистику заболеваемости COVID-19 в Университете, России и Мире. <br/>
+📊 Статистика заболеваемости обновляется каждый день в **12:30**. <br/>
+📰 Новости университета обновляются каждый день в **12:00, 15:00, 19:00 и 22:00**. <br/>
 
 <p align="center">
    <b> 🖼️ Галерея и ссылка бота Telegram Bot "COVID-19" </b>  
 </p>
  
- 🔗 Для посещения бота **перейдите** по [ссылке](https://t.me/covid19_mirea_bot) или в строке «Поиск» **введите** "@covid19_mirea_bot".
+ 🔗 Для посещения бота **перейдите** по [ссылке](https://t.me/rtu_mirea_info_bot) или в строке «Поиск» **введите** "@rtu_mirea_info_bot".
  
 <p align="center">
  <img alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_001.jpg" width="250"/>
  <img alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_002.jpg" width="250"/>
  <img alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_003.jpg" width="250"/>
+ <img alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_004.jpg" width="250"/>
+ <img alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_005.jpg" width="250"/>
+ <img alt="GIF" src="https://github.com/coder-chekunkov/covid19-telegram-bot/blob/main/documents/img_006.jpg" width="250"/>
 </p>
 
 ---
