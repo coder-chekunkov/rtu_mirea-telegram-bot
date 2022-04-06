@@ -16,3 +16,17 @@
 [31.3.2022][12:3:50] USER-ID: 440885999; USERNAME: XmuRi1; NAME: XmuRi1; LASTNAME: null ACTION: переход в "COVID-19"; 
 [31.3.2022][12:3:54] USER-ID: 440885999; USERNAME: XmuRi1; NAME: XmuRi1; LASTNAME: null ACTION: запрос статистики "COVID-19"; 
 [31.3.2022][12:3:55] USER-ID: 440885999; USERNAME: XmuRi1; NAME: XmuRi1; LASTNAME: null ACTION: запрос статистики заболеваемости "COVID-19" по РТУ МИРЭА; 
+[6.4.2022][13:35:27] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: присоединение/перезапуск; 
+[6.4.2022][13:35:28] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: переход в "Главное меню"; 
+[6.4.2022][13:35:30] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: переход в "Новости"; 
+[6.4.2022][13:35:32] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: запрос последних 10 новостей по "РТУ МИРЭА"; 
+[6.4.2022][13:40:5] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: присоединение/перезапуск; 
+[6.4.2022][13:40:7] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: переход в "Главное меню"; 
+[6.4.2022][13:40:13] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: переход в "Новости"; 
+[6.4.2022][13:40:15] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: присоединение/перезапуск; 
+[6.4.2022][13:40:17] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: переход в "Разработчики"; 
+[6.4.2022][13:40:20] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: переход в "Главное меню"; 
+[6.4.2022][13:40:21] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: переход в "COVID-19"; 
+[6.4.2022][13:40:23] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: запрос статистики "COVID-19"; 
+[6.4.2022][13:40:30] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: запрос статистики заболеваемости "COVID-19" по РТУ МИРЭА; 
+[6.4.2022][13:40:34] USER-ID: 622867340; USERNAME: cdr_chknkv; NAME: Alexandr; LASTNAME: Chekunkov; ACTION: запрос статистики заболеваемости "COVID-19" по Миру; 

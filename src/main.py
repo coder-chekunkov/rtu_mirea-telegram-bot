@@ -72,9 +72,6 @@ def get_text_messages(message):
     elif message.text == "/university":
         # Информация о институтах и кафедр:
         univercity_creator.show_buttons_university(message, telebot, bot)
-    elif message.text == "/schedule":
-        # Расписание:
-        show_schedule(message)
     else:
         show_message_counter(message)
 
@@ -97,17 +94,6 @@ def show_develop(message):
 
     # Создание лога:
     log_creator.make_log(message, "переход в \"Разработчики\"")
-
-
-# Метод отправки расписания:
-def show_schedule(message):
-    TEXT_SCHEDULE = "В разработке!"
-    bot.send_message(message.from_user.id, TEXT_SCHEDULE,
-                     parse_mode="Markdown",
-                     disable_web_page_preview=True)
-
-    # Создание лога:
-    log_creator.make_log(message, "переход в \"Расписание\"")
 
 
 # Метод отправки клавиатуры с уточнением задачи:
